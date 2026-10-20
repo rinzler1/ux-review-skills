@@ -10,6 +10,8 @@ Your agent can build any screen you ask for. These skills make it ask the questi
 
 They don't generate styles or colour palettes. They review **how people move through a product**, **what each screen should show**, and **what the work actually means**, and they turn what they find into ranked, small pieces of work.
 
+The headline feature: **fan out over your users' journeys.** One agent per use case walks your running app the way a person would, all at the same time. Their findings merge into a single list ranked by how often each journey happens, how badly it breaks, and how many journeys hit the same defect.
+
 ---
 
 ## Quick start
@@ -58,11 +60,52 @@ Skills load in the next session.
 
 ---
 
+## Fan out: one agent per user journey
+
+Most UX reviews look at screens one at a time. People don't use screens one at a time: they come to get something done, and they cross five screens, two waits and a decision to do it. `interaction-flow fan-out` reviews your product the way people use it, **one typical journey per agent, in parallel**.
+
+```text
+                                   ┌─▶ agent 1 · "sign up and invite a teammate"   (weekly) ─┐
+                                   ├─▶ agent 2 · "create an order"                 (daily)  ─┤
+ intent ─▶ objects ─▶ journeys ────┼─▶ agent 3 · "fix a failed payment"            (rare)   ─┼─▶ merge ─▶ ranked
+ who, job, one home   picked by    ├─▶ agent 4 · "find what changed this week"     (weekly) ─┤   group     priorities
+ authority  per       frequency ×  ├─▶ agent 5 · "configure notifications"         (rare)   ─┤   duplicates  ─▶ stories
+            object    consequence  └─▶ agent 6 · "end-of-day review"               (daily)  ─┘
+                                        each: its own throwaway instance, real clicks,
+                                        screenshots, measured steps, screen passes
+```
+
+**How the journeys are chosen.** The skill first states the product's intent and maps its objects. Then it picks five to eight journeys by **frequency × consequence**: the daily loop first, then the rare but costly ones (first use, recovery after a failure, undo). You can name your own.
+
+**What each agent does.** Each agent gets the same brief: the intent, the object map, the four modes, the checklist and the human principles. Then it walks its one journey in the running app:
+- it clicks, waits and reads as the person would;
+- it screenshots every stop and measures each step: clicks, page changes, waits, what must be remembered, what's said twice, steps whose order isn't enforced;
+- at every screen it runs the pertinence, structure and disclosure passes;
+- it returns findings in one shared format, each with its mode, severity and human cause.
+
+Agents work in isolation. Each gets its own throwaway data and port, and production is read only. Anything an agent couldn't observe, it says so.
+
+**How the findings merge:**
+- The same defect seen on several journeys becomes one finding, with a higher reach.
+- A finding seen on only one journey keeps reach 1; it's never dropped.
+- Everything is ranked by **priority = frequency × consequence × reach**:
+  - frequency: daily 3, weekly 2, rare 1;
+  - consequence: blocks 3, costs 2, confuses 1;
+  - reach: how many journeys hit it.
+- Ties go to doing and waiting steps, which are on the daily path.
+- The report adds the time spent per mode across all journeys, and says which journeys couldn't be fully walked.
+
+**Why it works.** A defect that one journey shows as a small irritation can be the same defect that blocks two others. Only walking them side by side shows that. On a real product, a six-journey fan-out independently found every problem the team had hit by hand that week. Its top-ranked finding came from three separate journeys.
+
+**Before it starts,** the skill tells you how many agents it will launch and a rough token cost. To review a single journey or screen without fanning out, use `review` or `screen`.
+
+---
+
 ## The three skills
 
 | Skill | Use it when | You get | Talks to you? |
 |---|---|---|---|
-| [**interaction-flow**](skills/interaction-flow/SKILL.md) | a workflow feels clunky, before a redesign, or to rank UX work | journeys measured in the running app, every screen judged, findings ranked by priority, small stories to fix them | No. It works from evidence |
+| [**interaction-flow**](skills/interaction-flow/SKILL.md) | a workflow feels clunky, before a redesign, or to rank UX work | **one agent per user journey, in parallel**, walking the running app; every screen judged; findings merged and ranked by priority; small stories to fix them | No. It works from evidence |
 | [**design-reflection**](skills/design-reflection/SKILL.md) | someone proposes a feature, before its spec | a one-page design brief: the need, where it belongs, the simplest shape, two alternatives, at most three questions | Rarely. At most three questions |
 | [**clarify-intent**](skills/clarify-intent/SKILL.md) | an intent is vague, or a spec reads well but could mean two things | a few questions at a time with proposed answers, a decisions log, then a reviewed or written spec | Yes. That's its job |
 
@@ -74,9 +117,9 @@ Skills load in the next session.
 
 **The problem.** Each page passes a design review. But the action the person needs is on another tab, the same state is worded three ways, and two buttons work only if pressed in an order nobody wrote down. Screen-level tools never see it, because the defect sits between the screens.
 
-**The fix.** Walk the real app, journey by journey, and measure it: clicks, page changes, waits, what the person must remember, what's said twice, which steps depend on an order the screen doesn't enforce. Then give each decision one place, and each state one word.
+**The fix.** Walk the real app, journey by journey, with one agent per journey, all in parallel. Measure each one: clicks, page changes, waits, what the person must remember, what's said twice, which steps depend on an order the screen doesn't enforce. Merge what they find, rank it, then give each decision one place and each state one word.
 
-→ [`interaction-flow`](skills/interaction-flow/SKILL.md)
+→ [`interaction-flow fan-out`](#fan-out-one-agent-per-user-journey)
 
 ### 2. The screen shows everything, so it shows nothing
 
@@ -161,7 +204,7 @@ Q: Include a totals row?                                     A: assumed yes (fin
 ## How `interaction-flow` works
 
 ```text
- intent ─▶ objects ─▶ journeys ───────────────────▶ findings ─▶ priorities ─▶ model ─▶ stories
+ intent ─▶ objects ─▶ journeys (fanned out) ───────▶ findings ─▶ priorities ─▶ model ─▶ stories
  who,      one home    walked in the running app,    each with   frequency ×   places,    small,
  job,      per object, measured step by step         its human   consequence   decisions, sequenced,
  authority meaning     (one agent per journey with   cause       × reach       vocabulary, each with
