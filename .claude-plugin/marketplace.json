@@ -1,0 +1,8 @@
+{
+  "name": "ux-review",
+  "description": "UX review skills for Claude Code",
+  "owner": { "name": "Philip Oligny" },
+  "plugins": [
+    { "name": "ux-review", "source": "./", "description": "interaction-flow, design-reflection and clarify-intent" }
+  ]
+}

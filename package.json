@@ -1,0 +1,43 @@
+{
+  "name": "ux-review-skills",
+  "version": "0.1.0",
+  "description": "Agent skills that bring a designer's eye to software work: review how people move through a product (interaction-flow), shape a feature before it is built (design-reflection), and interview the owner to pin down meaning and intent (clarify-intent).",
+  "keywords": [
+    "claude-code",
+    "agent-skills",
+    "skills",
+    "ux",
+    "interaction-design",
+    "product-design",
+    "spec",
+    "design-review"
+  ],
+  "license": "MIT",
+  "author": "Philip Oligny",
+  "type": "module",
+  "bin": {
+    "ux-review-skills": "bin/cli.mjs"
+  },
+  "files": [
+    "bin",
+    "skills",
+    ".claude-plugin",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "sync": "node scripts/sync-shared.mjs",
+    "prepublishOnly": "node scripts/sync-shared.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rinzler1/ux-review-skills.git"
+  },
+  "homepage": "https://github.com/rinzler1/ux-review-skills#readme",
+  "bugs": {
+    "url": "https://github.com/rinzler1/ux-review-skills/issues"
+  }
+}
