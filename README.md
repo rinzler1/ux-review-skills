@@ -65,14 +65,15 @@ Skills load in the next session.
 Most UX reviews look at screens one at a time. People don't use screens one at a time: they come to get something done, and they cross five screens, two waits and a decision to do it. `interaction-flow fan-out` reviews your product the way people use it, **one typical journey per agent, in parallel**.
 
 ```text
-                                   ┌─▶ agent 1 · "sign up and invite a teammate"   (weekly) ─┐
-                                   ├─▶ agent 2 · "create an order"                 (daily)  ─┤
- intent ─▶ objects ─▶ journeys ────┼─▶ agent 3 · "fix a failed payment"            (rare)   ─┼─▶ merge ─▶ ranked
- who, job, one home   picked by    ├─▶ agent 4 · "find what changed this week"     (weekly) ─┤   group     priorities
- authority  per       frequency ×  ├─▶ agent 5 · "configure notifications"         (rare)   ─┤   duplicates  ─▶ stories
-            object    consequence  └─▶ agent 6 · "end-of-day review"               (daily)  ─┘
-                                        each: its own throwaway instance, real clicks,
-                                        screenshots, measured steps, screen passes
+ intent + object map                        one agent per journey, in parallel
+          │                ┌─▶ "sign up and invite a teammate"   weekly ─┐
+          ▼                ├─▶ "create an order"                 daily  ─┤
+ journeys picked by  ──────┼─▶ "fix a failed payment"            rare   ─┼─▶ merge ─▶ ranked
+ frequency × consequence   ├─▶ "find what changed this week"     weekly ─┤           priorities
+                           └─▶ "end-of-day review"               daily  ─┘           ─▶ stories
+
+ each agent: its own throwaway instance · real clicks · screenshots · measured steps
+             · pertinence, structure and disclosure passes at every screen
 ```
 
 **How the journeys are chosen.** The skill first states the product's intent and maps its objects. Then it picks five to eight journeys by **frequency × consequence**: the daily loop first, then the rare but costly ones (first use, recovery after a failure, undo). You can name your own.
