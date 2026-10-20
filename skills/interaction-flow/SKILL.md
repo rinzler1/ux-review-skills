@@ -104,9 +104,13 @@ With four or more journeys, walk them in parallel: one agent per journey, then m
 1. **Prepare one brief, shared by every agent.** It holds the intent paragraph and the object map (steps 1–2), the four modes table, the path to `references/flow-checklist.md` and the journey template.
 2. **Add per journey:** its trigger, its end state, its frequency, and how to reach its starting state (sample data or a seed script).
    Also include the paths to `references/how-people-think.md`, `references/screen-pertinence.md`, `references/structure-and-reading.md`, `references/disclosure-patterns.md` and `references/meaning-and-context.md` (and the inventory script), so each agent names the human cause of its findings.
-3. **Isolate each agent:** its own throwaway instance (own data directory, own port), read-only on production, no edits to the product's code. The agent's only output is its report.
+3. **Isolate each agent.** Before launching, ask the person where the agents may walk:
+   - a disposable instance they start for you (a local dev server with seed data, a preview deploy), with how to start it if each agent needs its own;
+   - or a staging or production URL to walk **read-only**.
+
+   Never guess how to start or reset their app. Read-only means page loads, tabs, folds, menus, hovering and reading only; any step that would save, send, pay, delete or publish is described from the code and the records instead, and marked "not observed". No agent edits the product's code. The agent's only output is its report.
 4. **Fix the return format.** The measured journey table, then findings with the template's fields, each tagged with mode and severity. Where the agent could not observe something, it says so.
-5. **Launch them together** with the Agent tool, one call per journey in a single message. Tell the user the number of agents and a rough token cost first; fanning out is not free.
+5. **Launch them together,** one subagent per journey in a single message (the Agent tool in Claude Code). First tell the person the number of agents, roughly the cost (on one real product, six journeys used about a million tokens), and where they will walk, and wait for their go-ahead. Where the agent has no subagents, walk the journeys one after another yourself with the same brief, and say so.
 
 **Merging:**
 - **Group duplicates.** Two journeys hitting the same defect make one finding with a higher reach.

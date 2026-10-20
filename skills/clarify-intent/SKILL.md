@@ -43,7 +43,7 @@ Rank candidates by **uncertainty × impact**: ask first where a wrong guess woul
 
 ## How to ask
 
-- **Few at a time.** One to four questions per turn, related ones together. In Claude Code use the AskUserQuestion tool: two to four options per question, the recommended one first with "(Recommended)" in its label, and a short description of each option's consequence. The person can always answer in their own words.
+- **Few at a time.** One to four questions per turn, related ones together. Where the agent offers a multiple-choice question tool (AskUserQuestion in Claude Code), use it: two to four options per question, the recommended one first with "(Recommended)" in its label, and a short description of each option's consequence. Elsewhere, ask in plain text in the same shape: numbered questions, lettered options with their consequences, the recommended one first. The person can always answer in their own words.
 - **Propose, don't quiz.** Every question carries proposed answers and why you lean to one, drawn from what you explored. People recognise faster than they recall.
 - **Name the consequence.** Each option says what it would change in the spec or the product ("Refuse from the queue: safer, but a line can stall").
 - **Plain words.** The person's vocabulary, not the code's. Quote the ambiguous phrase you are resolving.

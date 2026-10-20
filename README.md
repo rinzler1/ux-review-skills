@@ -2,11 +2,14 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 ![Skills](https://img.shields.io/badge/skills-3-blue)
-![Agents](https://img.shields.io/badge/agents-Claude%20Code%20%C2%B7%20Cursor%20%C2%B7%20Codex%20%C2%B7%20more-lightgrey)
+![Status](https://img.shields.io/badge/status-early-orange)
+![Agents](https://img.shields.io/badge/best%20in-Claude%20Code-lightgrey)
 
 **Agent skills that bring a designer's eye to software work.**
 
 Your agent can build any screen you ask for. These skills make it ask the questions a good designer would: what the person is trying to do, where a decision belongs, what this screen is for at this moment, and what a feature really means before anyone builds it.
+
+> **Status: early (v0.1).** The method comes from real use on one product. The skills as packaged here are new: feedback and issues are very welcome.
 
 They don't generate styles or colour palettes. They review **how people move through a product**, **what each screen should show**, and **what the work actually means**, and they turn what they find into ranked, small pieces of work.
 
@@ -19,18 +22,20 @@ The headline feature: **fan out over your users' journeys.** One agent per use c
 ### 1. Install
 
 ```sh
-npx ux-review-skills install
+npx skills add rinzler1/ux-review-skills
 ```
 
-That installs all three skills into `~/.claude/skills` for every project. Add `--project` for the current project only, or name the skills you want.
+The [`skills` CLI](https://skills.sh) installs them for Claude Code, Cursor, Codex, Gemini CLI, GitHub Copilot and other agents. Add `--skill <name>` for just one.
 
 <details>
-<summary><b>Other agents and install methods</b></summary>
+<summary><b>Other install methods</b></summary>
 
-**Any agent supported by the `skills` CLI** (Claude Code, Cursor, Codex, Gemini CLI, GitHub Copilot and others):
+**npm** (once the package is published):
 
 ```sh
-npx skills add rinzler1/ux-review-skills
+npx ux-review-skills install            # all three into ~/.claude/skills
+npx ux-review-skills install --project  # this project only
+npx ux-review-skills list               # what is installed where
 ```
 
 **Claude Code plugin** (updates with the marketplace):
@@ -45,6 +50,18 @@ Commands are then prefixed: `/ux-review:interaction-flow`.
 **By hand:** copy `skills/*` into your agent's skills folder.
 
 Pick one method per agent; installing twice gives you every skill twice.
+
+</details>
+
+<details>
+<summary><b>What works where</b></summary>
+
+| Feature | Claude Code | Other agents |
+|---|---|---|
+| All three skills, all passes and references | yes | yes |
+| Fan-out, one agent per journey in parallel | yes (subagents) | the journeys are walked one after another, with the same brief |
+| `clarify-intent` multiple-choice questions | yes | asked in plain text, in the same format |
+| Screen inventory script | needs Python and Playwright | same |
 
 </details>
 
@@ -84,7 +101,7 @@ Most UX reviews look at screens one at a time. People don't use screens one at a
 - at every screen it runs the pertinence, structure and disclosure passes;
 - it returns findings in one shared format, each with its mode, severity and human cause.
 
-Agents work in isolation. Each gets its own throwaway data and port, and production is read only. Anything an agent couldn't observe, it says so.
+**Where the agents walk is your call.** Before launching, the skill asks for a disposable instance (a local dev server with seed data, a preview deploy) or a URL to walk read-only. It never guesses how to start your app. Read-only means loading pages, opening tabs and folds, and reading. A step that would save, send, pay or delete is described from the code instead, and marked "not observed". This is an instruction to the agents, not a sandbox, so point them at something you can afford.
 
 **How the findings merge:**
 - The same defect seen on several journeys becomes one finding, with a higher reach.
@@ -96,9 +113,15 @@ Agents work in isolation. Each gets its own throwaway data and port, and product
 - Ties go to doing and waiting steps, which are on the daily path.
 - The report adds the time spent per mode across all journeys, and says which journeys couldn't be fully walked.
 
-**Why it works.** A defect that one journey shows as a small irritation can be the same defect that blocks two others. Only walking them side by side shows that. On a real product, a six-journey fan-out independently found every problem the team had hit by hand that week. Its top-ranked finding came from three separate journeys.
+**Why it works.** A defect that one journey shows as a small irritation can be the same defect that blocks two others. Only walking them side by side shows that. The method's first real use was a six-journey review of a delivery-pipeline app, orchestrated by hand from this method. It independently found the main problems the team had run into that week:
+- an action that could be taken in the wrong order;
+- a state worded four ways;
+- a decision screen stacking every option;
+- a missing way to order the work.
 
-**Before it starts,** the skill tells you how many agents it will launch and a rough token cost. To review a single journey or screen without fanning out, use `review` or `screen`.
+Its top finding came from four of the six journeys. The packaged `fan-out` command automates that orchestration; tell us how it does on your product.
+
+**Before it starts,** the skill is written to tell you how many agents it will launch, a rough cost and where they will walk, and to wait for your go-ahead. To review a single journey or screen without fanning out, use `review` or `screen`.
 
 ---
 
@@ -261,7 +284,7 @@ It needs Python 3 and Playwright: `pip install playwright && playwright install 
 <details>
 <summary><b>How expensive is a fan-out review?</b></summary>
 
-One agent per journey, each walking the app and reading code. On a medium web app, six journeys took about a million tokens. The skill tells you how many agents it will launch before it starts. For one journey or one screen, use `review` or `screen` instead.
+One agent per journey, each walking the app and reading code. On its first real use, six journeys on a medium web app used about a million tokens. The skill asks before launching. For one journey or one screen, use `review` or `screen` instead.
 </details>
 
 <details>
@@ -280,7 +303,7 @@ They complement each other. Those skills decide how a screen looks and generate 
 
 ## Contributing
 
-Issues and pull requests are welcome.
+Issues and pull requests are welcome. The most useful contribution right now is a test report: run the checks in [docs/manual-tests.md](docs/manual-tests.md) on your own product and tell us what the agent did.
 
 The shared references have one source each:
 - `skills/interaction-flow/references/` for the shared reference files;
