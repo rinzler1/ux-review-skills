@@ -1,6 +1,21 @@
 ---
 name: interaction-flow
-description: Map, review and redesign how a person moves through a product to get their work done — the journeys, not the pixels. Starts from the product's intent and object hierarchy, walks the real app to measure each typical use case (clicks, page changes, waits, repeated or missing information, steps whose order the user must remember), tags every step by the person's mode (doing, waiting, understanding, configuring) since each mode needs different design, can fan out one agent per use case and merge their findings into a ranked priority list, checks that every object says why it exists and that context inherits from level to level and stays connected to what the product is today, judges how each screen groups, separates and orders its content for the way people read and whether each tab, pane, drawer, modal or fold fits how its content is used, rates what each screen shows against what the person needs at that moment (now, soon, on demand, elsewhere, never), finds flow defects, and proposes an interaction model with one place per decision, one vocabulary for state, and layers from beginner to expert. Use when a workflow "feels clunky", when the user asks how people actually use a feature, to plan where features and decisions should live, before redesigning navigation, when a user did steps in an order that could not work, or to turn UX feedback into small, sequenced stories. Complements screen-level design skills (impeccable, design-critique), which judge a page; this one judges the path between pages.
+description: >-
+  Map, review and redesign how a person moves through a product to get their work done — the journeys, not the
+  pixels. Starts from the product's intent and object hierarchy, walks the real app to measure each typical
+  use case (clicks, page changes, waits, repeated or missing information, steps whose order the user must
+  remember), tags every step by the person's mode (doing, waiting, understanding, configuring) since each mode
+  needs different design, can fan out one agent per use case and merge their findings into a ranked priority
+  list, checks that every object says why it exists and that context inherits from level to level and stays
+  connected to what the product is today, judges how each screen groups, separates and orders its content for
+  the way people read and whether each tab, pane, drawer, modal or fold fits how its content is used, rates
+  what each screen shows against what the person needs at that moment (now, soon, on demand, elsewhere,
+  never), finds flow defects, and proposes an interaction model with one place per decision, one vocabulary
+  for state, and layers from beginner to expert. Use when a workflow "feels clunky", when the user asks how
+  people actually use a feature, to plan where features and decisions should live, before redesigning
+  navigation, when a user did steps in an order that could not work, or to turn UX feedback into small,
+  sequenced stories. Complements screen-level design skills (impeccable, design-critique), which judge a page;
+  this one judges the path between pages.
 user-invocable: true
 argument-hint: "[map | review <journey> | screen <url> | fan-out | model | layers | stories] [product or area]"
 ---

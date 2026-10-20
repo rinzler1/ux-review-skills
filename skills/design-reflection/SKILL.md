@@ -1,6 +1,15 @@
 ---
 name: design-reflection
-description: Bring a designer's reflection to a feature idea before it is specified or built. The product owner drives what to build; this skill asks the questions a good designer would — what need is behind it, which existing concept it belongs to, the simplest shape that delivers it, what to leave out, its states and edge cases, what can be derived instead of asked, where it lives in each mode and layer, how it scales (more items, parallel work, teams), what it removes, and how we will know it worked — then recommends a shape with alternatives and a few decisive questions. Use when someone proposes a feature or a change ("epics should have dependencies", "add a diagram section"), when shaping an epic or story before its spec, when reviewing a spec for design soundness, or when an idea feels right but its form is unclear. Pairs with interaction-flow, which reviews flows that already exist.
+description: >-
+  Bring a designer's reflection to a feature idea before it is specified or built. The product owner drives
+  what to build; this skill asks the questions a good designer would — what need is behind it, which existing
+  concept it belongs to, the simplest shape that delivers it, what to leave out, its states and edge cases,
+  what can be derived instead of asked, where it lives in each mode and layer, how it scales (more items,
+  parallel work, teams), what it removes, and how we will know it worked — then recommends a shape with
+  alternatives and a few decisive questions. Use when someone proposes a feature or a change ("epics should
+  have dependencies", "add a diagram section"), when shaping an epic or story before its spec, when reviewing
+  a spec for design soundness, or when an idea feels right but its form is unclear. Pairs with
+  interaction-flow, which reviews flows that already exist.
 user-invocable: true
 argument-hint: "[feature idea or spec to reflect on]"
 ---

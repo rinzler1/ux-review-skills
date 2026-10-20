@@ -1,6 +1,15 @@
 ---
 name: clarify-intent
-description: Interview the person to pin down meaning and intent before (or while) work is specified — the conversational counterpart of design-reflection and interaction-flow. First explores the product, code and records so it never asks what they can answer, then asks only what the person alone can decide (the need, who and when, what done means, the authority line, scope, trade-offs, names, states that matter, the success signal), a few questions at a time, each with proposed answers and why, and records every decision. Two commands: `review <spec, story or feature>` finds where meaning or intent is ambiguous and resolves it with the person; `spec <idea or story>` interviews and then writes the spec. Use when the person says "ask me", "clarify", "interview me", "grill me on this", when an intent is vague, when a spec reads well but could mean two things, or before a costly run.
+description: >-
+  Interview the person to pin down meaning and intent before (or while) work is specified — the conversational
+  counterpart of design-reflection and interaction-flow. First explores the product, code and records so it
+  never asks what they can answer, then asks only what the person alone can decide (the need, who and when,
+  what done means, the authority line, scope, trade-offs, names, states that matter, the success signal), a
+  few questions at a time, each with proposed answers and why, and records every decision. Two commands:
+  `review <spec, story or feature>` finds where meaning or intent is ambiguous and resolves it with the
+  person; `spec <idea or story>` interviews and then writes the spec. Use when the person says "ask me",
+  "clarify", "interview me", "grill me on this", when an intent is vague, when a spec reads well but could
+  mean two things, or before a costly run.
 user-invocable: true
 argument-hint: "review <spec | story | feature> · spec <idea | story>"
 ---
