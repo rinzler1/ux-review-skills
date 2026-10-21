@@ -1,5 +1,6 @@
 # UX Review Skills
 
+[![npm](https://img.shields.io/npm/v/ux-review-skills)](https://www.npmjs.com/package/ux-review-skills)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 ![Skills](https://img.shields.io/badge/skills-3-blue)
 ![Status](https://img.shields.io/badge/status-early-orange)
@@ -30,7 +31,7 @@ The [`skills` CLI](https://skills.sh) installs them for Claude Code, Cursor, Cod
 <details>
 <summary><b>Other install methods</b></summary>
 
-**npm** (once the package is published):
+**npm:**
 
 ```sh
 npx ux-review-skills install            # all three into ~/.claude/skills
