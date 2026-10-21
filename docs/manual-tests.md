@@ -17,8 +17,10 @@ Give it nothing else, and watch whether it:
 - [ ] launches one subagent per journey in parallel (Claude Code), or says it will walk them one after another
 - [ ] gives every agent the same brief: intent, objects, modes, checklist, human principles
 - [ ] never writes in a read-only walk (no saves, sends, payments, deletions), and marks such steps "not observed"
+- [ ] reaches each starting state through the product's screens or seed script, and says so when an agent stepped around a check or skipped its instance
 - [ ] returns per journey: the measured steps with modes, screen passes (pertinence, structure, disclosure), and findings with severity, mode and human cause
-- [ ] merges duplicates across journeys, ranks by frequency × consequence × reach, and reports time per mode
+- [ ] merges duplicates across journeys, ranks by frequency × consequence × reach, breaks ties (blocker, then more findings), and reports time per mode
+- [ ] with an earlier review, marks each group still there, new or gone
 - [ ] proposes an interaction model and small sequenced stories
 
 Also note how long it took, its token use, and anything it got wrong about your product.

@@ -110,7 +110,8 @@ Most UX reviews look at screens one at a time. People don't use screens one at a
   - frequency: daily 3, weekly 2, rare 1;
   - consequence: blocks 3, costs 2, confuses 1;
   - reach: how many journeys hit it.
-- Ties go to doing and waiting steps, which are on the daily path.
+- Ties go to a group with a blocker, then to the group with more findings, then to doing and waiting steps, which are on the daily path.
+- With an earlier review, each group is marked still there, new or gone.
 - The report adds the time spent per mode across all journeys, and says which journeys couldn't be fully walked.
 
 **Why it works.** A defect that one journey shows as a small irritation can be the same defect that blocks two others. Only walking them side by side shows that. The method's first real use was a six-journey review of a delivery-pipeline app, orchestrated by hand from this method. It independently found the main problems the team had run into that week:
@@ -119,7 +120,9 @@ Most UX reviews look at screens one at a time. People don't use screens one at a
 - a decision screen stacking every option;
 - a missing way to order the work.
 
-Its top finding came from four of the six journeys. The packaged `fan-out` command automates that orchestration; tell us how it does on your product.
+Its top finding came from four of the six journeys.
+
+The packaged `fan-out` command was then run end to end on the same app, given only the command, in a session that already knew the product. It stated the intent, proposed eight journeys with reasons, asked where to walk, gave a cost and waited, launched eight agents in parallel, and merged 106 findings into 12 ranked groups. It confirmed which earlier problems were still there and found new ones the first run couldn't: a feature shipped the day before missing one of its four entry points, and a feedback loop nobody closed. It used about 1.7 million tokens and 20 minutes, more than its own estimate. Two agents strayed from the brief (one skipped its instance, one stepped around a check), and five groups tied for first place. The estimate, the brief and the tie-break were fixed after that run. Tell us how it does on your product.
 
 **Before it starts,** the skill is written to tell you how many agents it will launch, a rough cost and where they will walk, and to wait for your go-ahead. To review a single journey or screen without fanning out, use `review` or `screen`.
 
@@ -284,7 +287,7 @@ It needs Python 3 and Playwright: `pip install playwright && playwright install 
 <details>
 <summary><b>How expensive is a fan-out review?</b></summary>
 
-One agent per journey, each walking the app and reading code. On its first real use, six journeys on a medium web app used about a million tokens. The skill asks before launching. For one journey or one screen, use `review` or `screen` instead.
+One agent per journey, each walking the app and reading code. Expect about 200,000 tokens and up to 20 minutes per journey: eight journeys on a medium web app used 1.7 million tokens. The skill asks before launching. For one journey or one screen, use `review` or `screen` instead.
 </details>
 
 <details>
