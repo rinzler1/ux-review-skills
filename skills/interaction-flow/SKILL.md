@@ -104,13 +104,17 @@ With four or more journeys, walk them in parallel: one agent per journey, then m
 1. **Prepare one brief, shared by every agent.** It holds the intent paragraph and the object map (steps 1–2), the four modes table, the path to `references/flow-checklist.md` and the journey template.
 2. **Add per journey:** its trigger, its end state, its frequency, and how to reach its starting state (sample data or a seed script).
    Also include the paths to `references/how-people-think.md`, `references/screen-pertinence.md`, `references/structure-and-reading.md`, `references/disclosure-patterns.md` and `references/meaning-and-context.md` (and the inventory script), so each agent names the human cause of its findings.
+   If the product has a stand-in for slow or paid outside calls (a fake model, a sandbox payment provider), name it so agents can walk those steps, and have them label what it produced as simulated.
+   If an earlier review exists, give each agent its findings for that journey, so it reports which are still there, which are gone and which are new.
 3. **Isolate each agent.** Before launching, ask the person where the agents may walk:
    - a disposable instance they start for you (a local dev server with seed data, a preview deploy), with how to start it if each agent needs its own;
    - or a staging or production URL to walk **read-only**.
 
    Never guess how to start or reset their app. Read-only means page loads, tabs, folds, menus, hovering and reading only; any step that would save, send, pay, delete or publish is described from the code and the records instead, and marked "not observed". No agent edits the product's code. The agent's only output is its report.
+
+   Agents reach their starting state through the product's own screens or its documented seed script. An agent that steps around a check to get there, or skips its instance, says so and why, and marks what followed as reached by a shortcut.
 4. **Fix the return format.** The measured journey table, then findings with the template's fields, each tagged with mode and severity. Where the agent could not observe something, it says so.
-5. **Launch them together,** one subagent per journey in a single message (the Agent tool in Claude Code). First tell the person the number of agents, roughly the cost (on one real product, six journeys used about a million tokens), and where they will walk, and wait for their go-ahead. Where the agent has no subagents, walk the journeys one after another yourself with the same brief, and say so.
+5. **Launch them together,** one subagent per journey in a single message (the Agent tool in Claude Code). First tell the person the number of agents, roughly the cost (about 200,000 tokens and up to 20 minutes per journey: eight journeys on one real product used 1.7 million tokens), and where they will walk, and wait for their go-ahead. This can share the question that picks the journeys, as long as the count, cost and walk target are stated before the answer that serves as the go-ahead. Where the agent has no subagents, walk the journeys one after another yourself with the same brief, and say so.
 
 **Merging:**
 - **Group duplicates.** Two journeys hitting the same defect make one finding with a higher reach.
@@ -119,7 +123,11 @@ With four or more journeys, walk them in parallel: one agent per journey, then m
   - frequency: daily 3, weekly 2, rare 1;
   - consequence: blocks 3, costs 2, confuses 1;
   - reach: the number of journeys affected.
-- **Break ties** toward doing and waiting steps over configuring ones. They are on the daily path.
+- **Break ties,** which are common once several groups reach every daily journey:
+  - a group containing a blocker first;
+  - then the group with more findings;
+  - then doing and waiting steps over configuring ones, since they are on the daily path.
+- **Compare with the earlier review** when there is one: mark each group still there, new or gone.
 - **Report back** a ranked table first, then the per-journey details. Report the time spent per mode across all journeys. Say which journeys could not be fully walked.
 
 ## 4. Find the flow defects

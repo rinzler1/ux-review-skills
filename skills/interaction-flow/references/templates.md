@@ -39,10 +39,10 @@ Pertinence ratio: <x>% of the first viewport is **now** · The answer is <where,
 
 ## Priorities (after fan-out)
 
-| Rank | Finding | Mode | Severity | Journeys (reach) | Frequency | Priority | Fix |
-|---|---|---|---|---|---|---|---|
+| Rank | Finding | Mode | Severity | Journeys (reach) | Frequency | Priority | Since last review | Fix |
+|---|---|---|---|---|---|---|---|---|
 
-Priority = frequency (daily 3, weekly 2, rare 1) × consequence (blocks 3, costs 2, confuses 1) × reach (journeys affected). Under the table: time per mode across all journeys, and the journeys that could not be fully walked and why.
+Priority = frequency (daily 3, weekly 2, rare 1) × consequence (blocks 3, costs 2, confuses 1) × reach (journeys affected). Ties: a group with a blocker first, then more findings, then doing and waiting over configuring. "Since last review" is still, new or gone, or left out on a first review. Under the table: time per mode across all journeys, and the journeys that could not be fully walked and why.
 
 ## Interaction model
 
