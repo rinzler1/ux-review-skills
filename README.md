@@ -10,7 +10,7 @@
 
 Your agent can build any screen you ask for. These skills make it ask the questions a good designer would: what the person is trying to do, where a decision belongs, what this screen is for at this moment, and what a feature really means before anyone builds it.
 
-> **Status: early (v0.1).** The method comes from real use on one product. The skills as packaged here are new: feedback and issues are very welcome.
+> **Status: early (v0.2).** The method comes from real use on one product. The skills as packaged here are new: feedback and issues are very welcome.
 
 They don't generate styles or colour palettes. They review **how people move through a product**, **what each screen should show**, and **what the work actually means**, and they turn what they find into ranked, small pieces of work.
 
