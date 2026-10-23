@@ -24,16 +24,16 @@ Rate in context: the same element can be **Now** at one stop and **Elsewhere** a
 
 Per screen, report:
 
-- **Pertinence ratio** — share of the first viewport covered by **Now** elements. Under about a third, the screen is mostly about something else.
+- **Pertinence ratio** — share of the first viewport covered by **Now** elements. Use this as a contextual heuristic, not a pass/fail threshold. Count a working canvas as task content even when sparse; report the viewport and non-overlapping area denominator, and never sum overlapping containers or assign an unmeasured percentage.
 - **The answer's place** — where the element that answers the person's question sits (first viewport? how far down? how large?). The answer below the fold, or smaller than its neighbours, is a finding.
-- **Competing primaries** — count of elements styled as the main action or the main status. More than one is a finding.
+- **Competing primaries** — count of elements styled as the main action or the main status. Judge competition within the active task or region; several legitimate actions on a spatial workspace are not automatically a defect.
 - **Repeats** — facts shown more than once on the screen or already shown on the previous stop.
 - **Text against purpose** — the words per region (from the inventory) judged against the step: plenty is right where the person came to read, a few words where they came to decide, act, wait or find one fact.
 - **Never count** — elements rated Never; each is a removal candidate.
 
 ## 4. Verdict
 
-For each screen, one line: "<screen> at step <n> (<mode>): pertinence <x>%; answer <where>; <k> competing primaries; remove <list>; fold <list>; move <list> to <place>." Add each **Never**, misplaced answer and competing primary as a finding with its human cause (usually from `how-people-think.md`: limited attention, scanning, change outside focus, choice overload) and its severity.
+For each screen, one line: "<screen> at step <n> (<mode>): pertinence <x>%; answer <where>; <k> competing primaries; remove <list>; fold <list>; move <list> to <place>." Mark unmeasured percentages as unknown. Add demonstrated irrelevant content, misplaced answers and competing actions as findings with their consequence and human cause (usually from `how-people-think.md`: limited attention, scanning, change outside focus, choice overload) and its severity.
 
 Rules:
 

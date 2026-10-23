@@ -60,7 +60,7 @@ Pick one method per agent; installing twice gives you every skill twice.
 | Feature | Claude Code | Other agents |
 |---|---|---|
 | All three skills, all passes and references | yes | yes |
-| Fan-out, one agent per journey in parallel | yes (subagents) | the journeys are walked one after another, with the same brief |
+| Fan-out, one reviewer per complete use case | yes (subagents) | uses available delegation, shared-walker analysis, or sequential walks |
 | `clarify-intent` multiple-choice questions | yes | asked in plain text, in the same format |
 | Screen inventory script | needs Python and Playwright | same |
 
@@ -102,18 +102,19 @@ Most UX reviews look at screens one at a time. People don't use screens one at a
 - at every screen it runs the pertinence, structure and disclosure passes;
 - it returns findings in one shared format, each with its mode, severity and human cause.
 
-**Where the agents walk is your call.** Before launching, the skill asks for a disposable instance (a local dev server with seed data, a preview deploy) or a URL to walk read-only. It never guesses how to start your app. Read-only means loading pages, opening tabs and folds, and reading. A step that would save, send, pay or delete is described from the code instead, and marked "not observed". This is an instruction to the agents, not a sandbox, so point them at something you can afford.
+**Start with your current project.** Point the skill at the current worktree/local build, a prototype or a deployed URL. It uses available task/spec context internally; no separate baseline command, repository access or GitHub connection is required. Existing startup and access instructions are reused; missing access or mutation permission is requested only when needed. It never guesses how to reset your app. Read-only means loading pages, opening tabs and folds, and reading. A step that would save, send, pay or delete is described from the code instead, and marked "not observed". This is an instruction to the agents, not a sandbox, so point them at something you can afford.
 
 **How the findings merge:**
 - The same defect seen on several journeys becomes one finding, with a higher reach.
 - A finding seen on only one journey keeps reach 1; it's never dropped.
-- Everything is ranked by **priority = frequency × consequence × reach**:
+- Findings are prioritized by consequence, usage and reach, with evidence confidence and implementation effort shown separately. An optional ordinal aid is **frequency × consequence × reach**, not a measured business score:
   - frequency: daily 3, weekly 2, rare 1;
   - consequence: blocks 3, costs 2, confuses 1;
   - reach: how many journeys hit it.
 - Ties go to a group with a blocker, then to the group with more findings, then to doing and waiting steps, which are on the daily path.
 - With an earlier review, each group is marked still there, new or gone.
-- The report adds the time spent per mode across all journeys, and says which journeys couldn't be fully walked.
+- The report separates observed task time from tool execution time, leaves missing measurements unknown, and says which journeys could not be fully walked.
+- Each finding names a practical consequence, what should change, what must survive, and an acceptance scenario. Source concerns go to investigation; already-approved delivery gaps link existing work rather than reopening decisions.
 
 **Why it works.** A defect that one journey shows as a small irritation can be the same defect that blocks two others. Only walking them side by side shows that. The method's first real use was a six-journey review of a delivery-pipeline app, orchestrated by hand from this method. It independently found the main problems the team had run into that week:
 - an action that could be taken in the wrong order;
@@ -125,7 +126,7 @@ Its top finding came from four of the six journeys.
 
 The packaged `fan-out` command was then run end to end on the same app, given only the command, in a session that already knew the product. It stated the intent, proposed eight journeys with reasons, asked where to walk, gave a cost and waited, launched eight agents in parallel, and merged 106 findings into 12 ranked groups. It confirmed which earlier problems were still there and found new ones the first run couldn't: a feature shipped the day before missing one of its four entry points, and a feedback loop nobody closed. It used about 1.7 million tokens and 20 minutes, more than its own estimate. Two agents strayed from the brief (one skipped its instance, one stepped around a check), and five groups tied for first place. The estimate, the brief and the tie-break were fixed after that run. Tell us how it does on your product.
 
-**Before it starts,** the skill is written to tell you how many agents it will launch, a rough cost and where they will walk, and to wait for your go-ahead. To review a single journey or screen without fanning out, use `review` or `screen`.
+**Before it starts,** the skill states how many reviewers it will use, where they will walk and the task-specific effort. It reuses existing authorization and asks only for missing access or material additional scope/cost. One authenticated browser may supply evidence to parallel reviewers; the report distinguishes this from independent walks. To review a single journey or screen without fanning out, use `review` or `screen`.
 
 ---
 
@@ -233,8 +234,8 @@ Q: Include a totals row?                                     A: assumed yes (fin
 
 ```text
  intent ─▶ objects ─▶ journeys (fanned out) ───────▶ findings ─▶ priorities ─▶ model ─▶ stories
- who,      one home    walked in the running app,    each with   frequency ×   places,    small,
- job,      per object, measured step by step         its human   consequence   decisions, sequenced,
+ who,      one model   walked in the running app,    each with   frequency ×   places,    small,
+ job,      with views, measured step by step         its human   consequence   decisions, sequenced,
  authority meaning     (one agent per journey with   cause       × reach       vocabulary, each with
            and context  fan-out)                                               layers      its files
                               │
@@ -254,6 +255,14 @@ Every step is tagged with the person's **mode**, because each mode needs a diffe
 Every finding names its **human cause**: limited working memory, recognition over recall, choice overload, scanning, change outside the focus of attention, the psychology of waiting. The cause chooses the fix: a slip needs undo or a constraint, a mistake needs a clearer model.
 
 ---
+
+## Review depth and evidence
+
+The default is a snapshot evaluation with actionable fixes, not a setup exercise. Broad reviews choose complete operator goals before dividing the work; working, partial and placeholder features are distinguished. Each case includes current versus proposed paths, relevant return/recovery states and concrete validation steps. Excluded areas stay excluded.
+
+Code establishes what an implementation does; current accepted intent establishes what it should do. When an accepted change supersedes the build, the review identifies the delivery gap rather than improving an obsolete workflow. Without those records it proceeds from observable tasks and states its assumptions.
+
+The review uses cognitive walkthroughs, usability heuristics and scoped keyboard/focus/status guidance as practical lenses. See [UX methods and primary references](skills/interaction-flow/references/ux-methods.md). This is expert inspection, not a user study or accessibility certification. Reproducible source-only evaluation cases are in [docs/evaluation-cases.md](docs/evaluation-cases.md).
 
 ## Example prompts
 
@@ -288,7 +297,7 @@ It needs Python 3 and Playwright: `pip install playwright && playwright install 
 <details>
 <summary><b>How expensive is a fan-out review?</b></summary>
 
-One agent per journey, each walking the app and reading code. Expect about 200,000 tokens and up to 20 minutes per journey: eight journeys on a medium web app used 1.7 million tokens. The skill asks before launching. For one journey or one screen, use `review` or `screen` instead.
+Cost depends on scope, browser access, available context and delegation. A historical eight-journey run used 1.7 million tokens and about 20 minutes; that is not a per-journey minimum or prediction. The skill gives a task-specific estimate and marks unavailable cost/usage unknown. For one journey or screen, use `review` or `screen`.
 </details>
 
 <details>

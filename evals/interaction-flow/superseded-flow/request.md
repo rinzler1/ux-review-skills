@@ -1,0 +1,1 @@
+Review the current reporting header and the use case of changing a report value, then reading the corresponding parent summary. Use only these local records and source excerpts; do not start an app or change data. Return practical development priorities.

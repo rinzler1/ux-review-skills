@@ -1,0 +1,1 @@
+Review the navigation, header and typical mapping journeys in this worktree. Include the visible Table control. Exclude the unfinished inspector. Use only the supplied artifacts; the app cannot run in this evaluation. Give actionable fixes and acceptance steps.

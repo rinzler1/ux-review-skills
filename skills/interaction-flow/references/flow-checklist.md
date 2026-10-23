@@ -1,6 +1,6 @@
 # Flow defect checklist
 
-Run every journey through these questions. Each "no" is a finding; note the journey, the step and the evidence.
+Run every journey through these questions. Treat these as prompts, not automatic defects. A finding needs a concrete consequence for this journey, with evidence; record an unobserved concern as a hypothesis. Adapt thresholds and action counts to the product, including spatial canvases and multiple intentional authoring views.
 
 ## Modes
 - Is every step tagged with one mode (doing, waiting, understanding, configuring)?
@@ -40,7 +40,7 @@ Run every journey through these questions. Each "no" is a finding; note the jour
 ## What's on the screen
 - Is at least a third of the first viewport about this step's mode and question?
 - Is the answer to the person's question in the first viewport, and the most prominent thing there?
-- Is there exactly one element that reads as the primary action or status?
+- Within the active task or region, is the next action clear? Concurrent canvas tools and inspection controls need not reduce to one screen-wide primary.
 - Is anything shown that belongs to another journey or place (rate it "elsewhere": link it instead)?
 - Is anything shown that no step needs: internals, duplicates, decoration, unsourced figures (rate it "never": remove it)?
 - Is detail needed only sometimes folded one click away rather than spread on the page?
@@ -52,7 +52,7 @@ Run every journey through these questions. Each "no" is a finding; note the jour
 - Can the user leave mid-journey and come back to the same step?
 
 ## Decisions
-- Is each decision made in exactly one place?
+- Do intentional authoring surfaces share the same decision semantics and saved state, without forcing the person to reconcile conflicting copies?
 - Is everything needed for the decision visible where it is made, or one click away (L2)?
 - Is the decision reversible, and does the screen say so when it is not?
 - Are defaults shown with their source, and changeable before they take effect?
@@ -66,7 +66,7 @@ Run every journey through these questions. Each "no" is a finding; note the jour
 
 ## Next action
 - Does every screen showing an object's state also show its next action?
-- Is there exactly one primary action per screen state?
+- Is the primary action clear within each active task or region, without unrelated actions competing for attention?
 - After an action, does the user land where the next step is?
 
 ## Questions and answers
@@ -80,7 +80,7 @@ Run every journey through these questions. Each "no" is a finding; note the jour
 ## Findability
 - Can every option be reached from the journey that needs it, without visiting settings?
 - Is any capability only discoverable through documentation or a menu the journey never opens?
-- Are there two entry points for the same thing? Keep one.
+- Do multiple entry points reach the same object consistently and preserve context? Graph links, navigation trees and breadcrumbs may be useful complementary routes; remove only demonstrated confusion or divergent behavior.
 
 ## Errors and recovery
 - Does every error say what happened, why, and the one action that fixes it?
