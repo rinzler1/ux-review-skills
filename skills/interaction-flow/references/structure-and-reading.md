@@ -54,10 +54,10 @@ Human cause: similarity and good continuation; cognitive load from presentation.
 ## Measures to report per screen
 
 - **Containers:** the count in the first viewport, and how many hold more than one thing or have no heading.
-- **Maximum nesting depth** of containers. More than 2 is a finding.
+- **Maximum nesting depth** of containers. Investigate confusing nesting; depth alone is not a defect.
 - **Container styles in use:** bordered, filled, shadowed, bare. Note any style used for two different kinds of content.
-- **First fixation:** the largest, highest-contrast region or element in the first viewport. Say whether it's this step's answer.
+- **Predicted visual prominence:** note strong contrast/size and whether it serves the task. Do not call this measured eye fixation without user evidence.
 - **Reading order:** the first five regions in order, judged against the order the person needs.
 - **Distinct left edges:** among top-level regions and headings in the first viewport. Compare with the layout's intended columns.
 
-Turn each mismatch into a finding with its severity, mode and human cause, like any other.
+Report mismatches with a concrete task consequence, evidence, severity and human cause. Treat these as contextual prompts rather than automatic failures.

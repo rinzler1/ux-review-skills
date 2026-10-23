@@ -1,0 +1,1 @@
+Review our current share flow. A proposed simplification would remove the preview and send immediately after selecting a recipient, reducing three clicks to one. Evaluate the current journey and recommend practical next steps. Use the supplied records only; do not send anything or inspect other project areas.
