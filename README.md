@@ -8,11 +8,38 @@
 
 **Agent skills that bring a designer's eye to software work.**
 
-Your agent can build any screen you ask for. These skills make it ask the questions a good designer would: what the person is trying to do, where a decision belongs, what this screen is for at this moment, and what a feature really means before anyone builds it.
+Coding agents can now produce a polished screen in minutes. Polish is not the same as design. A product can look finished and still be hard to use: the action you need sits on another tab, the same state is worded three ways, and a decision only works if you remember to make another one first.
+
+These skills give your agent the questions a thoughtful designer asks before anyone argues about colours: what the person is trying to get done, what they need to know at this moment, where each decision belongs, and what a feature really means. They review the product you already have, explain what they find, and turn it into small, ranked pieces of work.
 
 > **Status: early (v0.3).** The method comes from real use on one product. The skills as packaged here are new: feedback and issues are very welcome.
 
-They don't generate styles or colour palettes. They review **how people move through a product**, **what each screen should show**, and **what the work actually means**, and they turn what they find into ranked, small pieces of work.
+## Design is more than how it looks
+
+Typography, colour, spacing and a consistent component library matter. They are also the part of design that is easiest to see, and the part most AI design tools now cover well. A great designer spends much of their time on what lies beneath:
+
+| Concept | The question it asks |
+|---|---|
+| **User journeys** | What is the person trying to get done, and what path do they actually take across screens, waits and decisions? |
+| **Mental models** | Does the product behave the way people expect it to, or must they learn its internals? |
+| **Information architecture** | Does every object have one clear home, and are related things found together? |
+| **Cognitive load** | What must the person remember from one screen to the next, and could the screen carry it for them? |
+| **Progressive disclosure** | Is what matters now shown first, with the rest one step away and nothing required hidden? |
+| **Feedback and waiting** | Does the person know what happened, what is in progress, how long it will take and whether they can leave? |
+| **Errors and recovery** | Can mistakes be prevented, and when something fails, does the screen say what to do next? |
+| **Meaning and vocabulary** | Is each state named one way everywhere, in the person's words rather than the system's? |
+
+Most design skills for agents today work on the surface: they choose fonts, generate palettes, align grids and remove visual clutter. That work is valuable, and these skills don't replace it. What surface tools mostly can't fix is a journey that fails between two well-designed screens, a decision placed far from the facts it needs, or a feature whose shape was never questioned. That is the gap these skills address. Use them alongside a visual design skill, not instead of one.
+
+### A first step, not a replacement for designers
+
+These skills don't replace a designer, and certainly not a senior one. Experienced designers bring things no checklist can: research with real people, judgement about trade-offs that have no right answer, a sense of the business and its users, taste built over years, and the ability to bring a team to a shared decision. An agent walking an app is an expert inspection. It predicts likely problems; it doesn't observe real users.
+
+What the skills can do is the methodical part, quickly and on every change: walk each journey, count the steps, notice the state worded three ways, the wait with no feedback, the error with no way out. For a team without a designer, that is a useful first step and a common vocabulary. For a team with one, it may clear the routine findings from the table, so that designers spend their time on the problems that need them: research, strategy, and the hard trade-offs.
+
+### What the three skills do
+
+They don't generate styles or colour palettes. They review **how people move through a product**, **what each screen should show**, and **what the work actually means**.
 
 The headline feature: **fan out over your users' journeys.** One agent per use case walks your running app the way a person would, all at the same time. Their findings merge into a single list ranked by how often each journey happens, how badly it breaks, and how many journeys hit the same defect.
 
@@ -316,6 +343,12 @@ Cost depends on scope, browser access, available context and delegation. Histori
 <summary><b>A skill doesn't show up after installing</b></summary>
 
 Skills load when a session starts: open a new one. If you installed with more than one method, remove the duplicates. `npx ux-review-skills list` shows what is installed where.
+</details>
+
+<details>
+<summary><b>Will this replace our designer?</b></summary>
+
+No. It is an expert inspection that runs quickly and repeatably, not research with real people, and it has no taste or business judgement of its own. See [A first step, not a replacement for designers](#a-first-step-not-a-replacement-for-designers). Teams with a designer can use it to clear routine findings before a design review, so that the review is spent on harder questions.
 </details>
 
 <details>
