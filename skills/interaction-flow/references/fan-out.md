@@ -10,7 +10,7 @@ Include first-use and repeated/expert paths where they differ. Sample representa
 
 ## Give every reviewer the same context
 
-Share intent/authority, object relationships, review target/version, relevant accepted decisions, scope/exclusions, allowed actions, evidence vocabulary and prior findings. Add per case its trigger, starting state, successful outcome, likely frequency and how to reach it through real screens or documented fixtures. Include only the reference lenses relevant to the task.
+Share intent/authority, object relationships, review target/version, relevant accepted decisions, scope/exclusions, allowed actions, evidence vocabulary and prior findings. Add per case its trigger, starting state, successful outcome, likely frequency and how to reach it through real screens or documented fixtures, prepared before dispatch where it isn't in the data (see SKILL.md step 2). Add what the reviewer may change, which side effects were disabled, and its budget for actions that spend money. Include only the reference lenses relevant to the task. Within a reviewer's word budget, apply the full pertinence, structure and disclosure passes to the one or two screens where the case's decision or wait happens, and note only clear problems elsewhere.
 
 Use available delegation tools, one reviewer per independent use case where practical; group adjacent cases when resources are limited and retain their individual outcomes. State count, target and a task-specific effort estimate; missing usage/cost is unknown. Honor session authorization and obtain any missing access or material additional cost approval. Do not use a historical token total as a per-journey minimum.
 
@@ -18,7 +18,7 @@ Independent browser walks need isolated state: disposable instances or independe
 
 ## Return format
 
-Each reviewer returns: current path and mode per step; measurements with evidence boundaries; findings with consequence and human cause; what works; proposed path/trade-off; recovery/return states; acceptance scenario and coverage gaps. Explicitly label fixture shortcuts or simulated external calls. An unexecuted mutation is not a measured successful journey.
+Each reviewer returns, within a stated word budget: current path and mode per step; measurements with evidence boundaries; findings with consequence and human cause; what works; proposed path/trade-off; recovery/return states; acceptance scenario and coverage gaps. Explicitly label fixture shortcuts or simulated external calls. An unexecuted mutation is not a measured successful journey.
 
 ## Merge by cause and useful next action
 

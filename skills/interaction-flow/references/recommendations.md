@@ -8,7 +8,7 @@ Preserve current benefits. A proposal to remove duplicate access may harm orient
 
 ## Rank without invented certainty
 
-State frequency as measured, owner-reported or estimated. Reach is distinct affected use cases, not agents or repeated observations. Consequence describes blocked completion, wrong outcomes, added work or unclear meaning. Confidence describes the evidence: reproduced, source-supported or hypothesis. Implementation effort is a separate estimate, not a reason to understate user harm.
+State frequency as measured, owner-reported or estimated. Observed incidence beats an estimate: counts from the product's own records, logs or support reports (how often the failure happened, how many complaints it drew) replace the guessed frequency, and an owner's explicit complaint about a journey is evidence of its consequence. Say when this lifts a finding above its ordinal score. Reach is distinct affected use cases, not agents or repeated observations. Consequence describes blocked completion, wrong outcomes, added work or unclear meaning. Confidence describes the evidence: reproduced, source-supported or hypothesis. Implementation effort is a separate estimate, not a reason to understate user harm.
 
 An optional ordinal aid is frequency (daily 3 / weekly 2 / rare 1) × consequence (blocks 3 / costs 2 / confuses 1) × reach. It is not a user metric or proof of business value. Do not fill missing values to produce a score, double-count overlapping cases, or mechanically place a low-confidence concern above a confirmed obstruction. Explain meaningful overrides for safety, dependency or evidence. Avoid a numerical score when qualitative priorities are clearer.
 

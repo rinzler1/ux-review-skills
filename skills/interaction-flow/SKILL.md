@@ -30,9 +30,13 @@ Identify the review target internally: current worktree/local build, deployed UR
 
 Use existing authorization and documented startup instructions. Ask only for missing access or decisions that materially change the review. Walk hosted sites read-only unless writes are expressly authorized; evaluate write paths from source and label them unobserved. Use disposable data for authorized creation, saving, sending or deletion tests. Never persist credentials/session tokens in reports or treat authenticated access as permission to mutate data.
 
+A local copy of real data (a database snapshot served by a local instance) is often the most useful place to walk: it has the product's real volume, history and odd records, and writes there harm nobody. Before allowing writes on a copy, audit what the app does beyond its own data, on its own or on a click: background jobs and schedulers, watchers, webhooks, email/SMS, payments, git or deploy hooks, outbound APIs and stored credentials. Disable or redirect each one (for example, point a repository path at a scratch clone, or blank a webhook URL) and say what you changed. Actions that spend money, such as model calls, paid APIs and messages sent, are described from source or capped per case, with the cap stated before the walk.
+
 ## 2. Choose complete use cases
 
 Pick goals by likely usage and consequence, including the ordinary daily loop and relevant first-use, interruption/return and recovery cases. Use representative available records: an empty state, ordinary data and a large/deep/long-name case where relevant. Label invented fixtures and frequency estimates. Don't claim a large-data problem from a tiny example alone.
+
+Real data rarely holds the short-lived states a journey starts from: work in flight, a failed action, a result waiting for a decision, a half-finished setup. Decide per case how its starting state is reached: found in the data, produced through the product's own screens, seeded, rewound in a disposable copy, or marked unobserved. Prepare shared states once, before walking, instead of leaving each reviewer to improvise. A rewind that goes around the product's own rules (editing records directly, removing a constraint) is a fixture shortcut: label it, and don't report what it alone breaks as a product defect.
 
 For each case state actor, trigger/start, successful outcome, entry points, regions crossed and relevant capability availability: **working / partial / placeholder / absent**. Include unavailable controls when they promise an in-scope job, but distinguish their intended journey from a working one. Do not recommend building every placeholder. Explicit exclusions apply to findings, proposed layouts and stories as well as screenshots.
 
@@ -70,6 +74,9 @@ A finding needs an affected case/step, concrete behaviour, a practical consequen
 - **Approved implementation gap:** existing work already defines the intended change; reference it instead of reopening it.
 - **Design recommendation:** a reasoned improvement with an explicit trade-off.
 - **Open product decision:** meaning or scope only the owner can choose.
+- **Content upkeep:** records the owner maintains that are stale or wrong (an outdated description, a title that no longer matches its content). Report them apart from interface defects. Before calling data wrong, duplicated or stale, read the underlying record, not only its label.
+
+When source is available, trace each observed blocker to its cause and cite file and line. It turns a symptom into a fixable defect, separates a bug from a design choice, and often shows the same cause behind findings on other journeys.
 
 Severity: **blocks** prevents completion or produces a wrong result; **costs** adds steps, memory, waiting or recovery; **confuses** obscures meaning/state. Do not upgrade a hypothesis to a proven blocker. No fixed viewport ratio, nesting count or one-primary-per-screen rule automatically creates a defect; judge the active task and demonstrated consequence.
 
