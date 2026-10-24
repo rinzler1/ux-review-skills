@@ -10,7 +10,7 @@
 
 Your agent can build any screen you ask for. These skills make it ask the questions a good designer would: what the person is trying to do, where a decision belongs, what this screen is for at this moment, and what a feature really means before anyone builds it.
 
-> **Status: early (v0.2).** The method comes from real use on one product. The skills as packaged here are new: feedback and issues are very welcome.
+> **Status: early (v0.3).** The method comes from real use on one product. The skills as packaged here are new: feedback and issues are very welcome.
 
 They don't generate styles or colour palettes. They review **how people move through a product**, **what each screen should show**, and **what the work actually means**, and they turn what they find into ranked, small pieces of work.
 
@@ -107,6 +107,7 @@ Most UX reviews look at screens one at a time. People don't use screens one at a
 **How the findings merge:**
 - The same defect seen on several journeys becomes one finding, with a higher reach.
 - A finding seen on only one journey keeps reach 1; it's never dropped.
+- Observed incidence beats a guess: counts from the product's records, logs or complaints replace the estimated frequency, and the report says when that lifts a finding.
 - Findings are prioritized by consequence, usage and reach, with evidence confidence and implementation effort shown separately. An optional ordinal aid is **frequency × consequence × reach**, not a measured business score:
   - frequency: daily 3, weekly 2, rare 1;
   - consequence: blocks 3, costs 2, confuses 1;
@@ -124,7 +125,18 @@ Most UX reviews look at screens one at a time. People don't use screens one at a
 
 Its top finding came from four of the six journeys.
 
-The packaged `fan-out` command was then run end to end on the same app, given only the command, in a session that already knew the product. It stated the intent, proposed eight journeys with reasons, asked where to walk, gave a cost and waited, launched eight agents in parallel, and merged 106 findings into 12 ranked groups. It confirmed which earlier problems were still there and found new ones the first run couldn't: a feature shipped the day before missing one of its four entry points, and a feedback loop nobody closed. It used about 1.7 million tokens and 20 minutes, more than its own estimate. Two agents strayed from the brief (one skipped its instance, one stepped around a check), and five groups tied for first place. The estimate, the brief and the tie-break were fixed after that run. Tell us how it does on your product.
+The packaged `fan-out` command was then run end to end on the same app, given only the command, in a session that already knew the product. It stated the intent, proposed eight journeys with reasons, asked where to walk, gave a cost and waited, launched eight agents in parallel, and merged 106 findings into 12 ranked groups. It confirmed which earlier problems were still there and found new ones the first run couldn't: a feature shipped the day before missing one of its four entry points, and a feedback loop nobody closed. It used about 1.7 million tokens and 20 minutes, more than its own estimate. Two agents strayed from the brief (one skipped its instance, one stepped around a check), and five groups tied for first place. The estimate, the brief and the tie-break were fixed after that run.
+
+A third run walked seven journeys on local copies of the same app's real data and used about 1.1 million tokens. Because the agents traced what they saw to the source, it found real bugs: an approval that went through and then refused its next step, a "fixed" notice raised while linked work was still open, and a timeline warning about a finished item. It also showed where the method was thin. Version 0.3 fixes these:
+- The copy held none of the short-lived states two journeys needed, so their agents spent about a third of their effort rebuilding them.
+- The app's own background jobs would have acted on the developer's working copy if they had not been redirected by hand.
+- Guessed frequency ranked the operator's most frequent real pain below cosmetic issues.
+- Two agents called records duplicates from their titles alone.
+- The screen inventory script failed on a client-rendered page.
+
+Tell us how it does on your product.
+
+**Copies of real data, side effects and starting states.** A local copy of your real data is often the best place to walk. Before any agent writes there, the skill lists what the app does beyond its own data (background jobs, webhooks, mail, payments, git or deploy hooks, outbound APIs) and disables or redirects each. Actions that cost money, such as model calls in an AI product, are described from the code or capped per journey. Real data rarely holds the moment a journey starts from (work in flight, a failed action, a result waiting for a decision), so the skill decides per journey how that state is reached and prepares shared states once.
 
 **Before it starts,** the skill states how many reviewers it will use, where they will walk and the task-specific effort. It reuses existing authorization and asks only for missing access or material additional scope/cost. One authenticated browser may supply evidence to parallel reviewers; the report distinguishes this from independent walks. To review a single journey or screen without fanning out, use `review` or `screen`.
 
@@ -285,19 +297,19 @@ They also trigger on plain requests like *"this workflow feels clunky"*, *"where
 <details>
 <summary><b>Does it change my app or my data?</b></summary>
 
-No. `interaction-flow` walks the app read-only. For anything that writes, it uses a throwaway instance you can point it at, never production. `design-reflection` and `clarify-intent` write a brief, a log or a spec, and saving them where your work is tracked is a separate step you approve.
+No. `interaction-flow` walks the app read-only. For anything that writes, it uses a throwaway instance you can point it at, never production. On a local copy of your real data, it lists the side effects it disabled (jobs, webhooks, mail, payments, git, outbound calls) before any write. `design-reflection` and `clarify-intent` write a brief, a log or a spec, and saving them where your work is tracked is a separate step you approve.
 </details>
 
 <details>
 <summary><b>The screen inventory script fails</b></summary>
 
-It needs Python 3 and Playwright: `pip install playwright && playwright install chromium`, or `uv run --with playwright python scripts/screen_inventory.py <url>`. Pass `--chromium <path>` to use an installed browser. It only reads the page.
+It needs Python 3 and Playwright: `pip install playwright && playwright install chromium`, or `uv run --with playwright python scripts/screen_inventory.py <url>`. Pass `--chromium <path>` to use an installed browser. It waits for client-rendered pages to settle and retries while the page mounts; raise `--wait` for slow apps. It only reads the page.
 </details>
 
 <details>
 <summary><b>How expensive is a fan-out review?</b></summary>
 
-Cost depends on scope, browser access, available context and delegation. A historical eight-journey run used 1.7 million tokens and about 20 minutes; that is not a per-journey minimum or prediction. The skill gives a task-specific estimate and marks unavailable cost/usage unknown. For one journey or screen, use `review` or `screen`.
+Cost depends on scope, browser access, available context and delegation. Historical runs used 1.7 million tokens for eight journeys (about 20 minutes) and 1.1 million for seven; that is not a per-journey minimum or prediction. The skill gives a task-specific estimate and marks unavailable cost/usage unknown. For one journey or screen, use `review` or `screen`.
 </details>
 
 <details>

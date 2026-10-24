@@ -102,7 +102,7 @@ def main() -> int:
     ap.add_argument("url")
     ap.add_argument("--width", type=int, default=1920)
     ap.add_argument("--height", type=int, default=1080)
-    ap.add_argument("--wait", type=int, default=1500, help="milliseconds to wait after load")
+    ap.add_argument("--wait", type=int, default=3000, help="milliseconds to wait after the page settles (raise it for slow client-rendered apps)")
     ap.add_argument("--chromium", help="path to a Chromium executable, if Playwright has none installed")
     ap.add_argument("--full", action="store_true", help="include elements below the first viewport")
     ap.add_argument("--json", action="store_true")
@@ -111,8 +111,23 @@ def main() -> int:
         browser = p.chromium.launch(headless=True, executable_path=a.chromium) if a.chromium else p.chromium.launch(headless=True)
         page = browser.new_page(viewport={"width": a.width, "height": a.height})
         page.goto(a.url, wait_until="load")
+        try:  # client-rendered pages (React, Vue, NiceGUI, ...) keep loading after "load"
+            page.wait_for_load_state("networkidle", timeout=a.wait + 10000)
+        except Exception:  # noqa: BLE001 - a page that never goes idle (polling, websockets) is measured anyway
+            pass
         page.wait_for_timeout(a.wait)
-        out = page.evaluate(JS, a.full)
+        out = None
+        for attempt in range(3):  # the body can be missing or replaced while a framework mounts
+            try:
+                page.wait_for_selector("body", state="attached", timeout=10000)
+                out = page.evaluate(JS, a.full)
+                break
+            except Exception as exc:  # noqa: BLE001
+                if attempt == 2:
+                    browser.close()
+                    print(f"could not read the page after 3 tries: {exc}", file=sys.stderr)
+                    return 1
+                page.wait_for_timeout(a.wait)
         browser.close()
     if a.json:
         json.dump(out, sys.stdout, indent=1, ensure_ascii=False)
