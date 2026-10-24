@@ -1,6 +1,6 @@
 {
   "name": "ux-review",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Review how people move through a product, shape features before they are built, and interview the owner to pin down meaning and intent.",
   "author": { "name": "Philip Oligny" },
   "license": "MIT",

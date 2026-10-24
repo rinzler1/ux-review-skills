@@ -18,8 +18,12 @@ Give it nothing else, and watch whether it:
 - [ ] gives every agent the same brief: intent, objects, modes, checklist, human principles
 - [ ] never writes in a read-only walk (no saves, sends, payments, deletions), and marks such steps "not observed"
 - [ ] reaches each starting state through the product's screens or seed script, and says so when an agent stepped around a check or skipped its instance
+- [ ] decides before dispatch how each case's starting state is reached (in the data, through the screens, seeded, rewound in a copy, or unobserved), and prepares shared states once
+- [ ] on a copy of real data, lists the side effects it disabled or redirected (jobs, webhooks, mail, payments, git, outbound calls) before allowing writes, and caps actions that spend money
 - [ ] returns per journey: the measured steps with modes, screen passes (pertinence, structure, disclosure), and findings with severity, mode and human cause
 - [ ] merges shared causes across distinct cases, prioritizes consequence/usage/reach with evidence confidence and separate effort, and reports only measured task time
+- [ ] uses observed incidence (records, logs, complaints) over guessed frequency where available, and says when that lifts a finding
+- [ ] traces observed blockers to file and line when source is available, and reports stale owner-maintained content apart from interface defects
 - [ ] with an earlier review, marks each group still there, new or gone
 - [ ] proposes an interaction model and small sequenced stories
 

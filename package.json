@@ -1,6 +1,6 @@
 {
   "name": "ux-review-skills",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Agent skills that bring a designer's eye to software work: review how people move through a product (interaction-flow), shape a feature before it is built (design-reflection), and interview the owner to pin down meaning and intent (clarify-intent).",
   "keywords": [
     "claude-code",
