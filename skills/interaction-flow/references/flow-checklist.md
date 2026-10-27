@@ -1,9 +1,9 @@
 # Flow defect checklist
 
-Run every journey through these questions. Treat these as prompts, not automatic defects. A finding needs a concrete consequence for this journey, with evidence; record an unobserved concern as a hypothesis. Adapt thresholds and action counts to the product, including spatial canvases and multiple intentional authoring views.
+Select questions that fit the requested journey and perspective. Treat them as prompts, not automatic defects. A finding needs a concrete consequence with evidence; record an unobserved concern as a hypothesis. Measurements and action counts are diagnostic, including on spatial canvases and multiple intentional authoring views.
 
 ## Modes
-- Is every step tagged with one mode (doing, waiting, understanding, configuring)?
+- Which steps benefit from a doing, waiting, understanding or configuring lens? Other tasks may need a different description.
 - Does each screen serve the mode the person is in at that step, rather than another one?
 - Doing: is the one action there, with the facts it needs and nothing else in the way?
 - Waiting: are the phase, the expected duration and "you may leave" shown, and is the person told when it's their turn?
@@ -16,7 +16,7 @@ Run every journey through these questions. Treat these as prompts, not automatic
 - Does each container hold one thing, with a heading that names it?
 - Does the strength of separation (space, hairline, fill, card, panel) match how unrelated things are, and are containers nested at most two deep?
 - Is the same kind of content always in the same kind of container, across screens?
-- Is the first thing the eye lands on this step's answer, and does the reading order match the order the person needs?
+- Is the predicted visual entry point this step's answer, and does the reading order match the order the person needs? Do not claim actual fixation without eye-tracking evidence.
 - Do regions and headings share a few left edges, with larger gaps between groups than within them?
 
 ## Disclosure patterns
@@ -38,8 +38,8 @@ Run every journey through these questions. Treat these as prompts, not automatic
 - Does the amount and form of text fit why the person is here: well-set prose where they came to read, the answer first in a few words where they came to decide, act, wait or find one fact?
 
 ## What's on the screen
-- Is at least a third of the first viewport about this step's mode and question?
-- Is the answer to the person's question in the first viewport, and the most prominent thing there?
+- Does the visible area support this step's task and evidence needs? Viewport share is diagnostic, not a pass threshold.
+- Is the answer findable at the point it is needed? Check placement and prominence in context.
 - Within the active task or region, is the next action clear? Concurrent canvas tools and inspection controls need not reduce to one screen-wide primary.
 - Is anything shown that belongs to another journey or place (rate it "elsewhere": link it instead)?
 - Is anything shown that no step needs: internals, duplicates, decoration, unsourced figures (rate it "never": remove it)?

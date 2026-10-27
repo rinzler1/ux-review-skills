@@ -2,15 +2,15 @@
 
 ## From observation to action
 
-Every finding names a task/step, behaviour, consequence and evidence. A principle can explain the cause, but does not prove a problem. Separate observed defects from source-backed concerns, already-approved implementation gaps, design recommendations and unresolved product meaning. Route these to implementation, investigation, existing work, or owner decision as appropriate.
+Every finding names a task/step, observed behaviour or source evidence, inferred consequence or explanation, and uncertainty. A principle can explain a possible cause, but does not prove a problem. Separate observed defects from source-backed concerns, already-approved implementation gaps, design recommendations and unresolved product meaning. Label a simulated-perspective review as a heuristic exercise, not user research. Route findings to implementation, investigation, existing work, or owner decision as appropriate.
 
 Preserve current benefits. A proposal to remove duplicate access may harm orientation; automatic action may remove needed control; hiding configuration may hide a required decision. State what the proposed change makes easier, what it could worsen and which accepted behaviour must remain. For consequential structural changes compare the current path and one or two plausible alternatives. Prefer a small coherent change using existing concepts; keeping the current design is a valid conclusion.
 
 ## Rank without invented certainty
 
-State frequency as measured, owner-reported or estimated. Observed incidence beats an estimate: counts from the product's own records, logs or support reports (how often the failure happened, how many complaints it drew) replace the guessed frequency, and an owner's explicit complaint about a journey is evidence of its consequence. Say when this lifts a finding above its ordinal score. Reach is distinct affected use cases, not agents or repeated observations. Consequence describes blocked completion, wrong outcomes, added work or unclear meaning. Confidence describes the evidence: reproduced, source-supported or hypothesis. Implementation effort is a separate estimate, not a reason to understate user harm.
+Rank confirmed blockers, wrong outcomes and other serious consequences ahead of lesser friction. Within comparable severity, use frequency and reach to order findings. State frequency as measured, owner-reported or estimated; do not treat a journey count as measured incidence. An owner's explicit complaint is evidence of concern, not a population rate. Reach counts distinct affected use cases, not agents or repeated observations. Confidence describes reproduced, source-supported or hypothetical evidence; implementation effort stays separate from user impact.
 
-An optional ordinal aid is frequency (daily 3 / weekly 2 / rare 1) × consequence (blocks 3 / costs 2 / confuses 1) × reach. It is not a user metric or proof of business value. Do not fill missing values to produce a score, double-count overlapping cases, or mechanically place a low-confidence concern above a confirmed obstruction. Explain meaningful overrides for safety, dependency or evidence. Avoid a numerical score when qualitative priorities are clearer.
+If an ordinal aid helps break ties within a severity band, use labelled frequency and reach assumptions. Do not multiply severity into a score that can bury a blocker, fill missing values, double-count overlapping cases, or rank a hypothesis as a confirmed obstruction. Explain meaningful dependency or evidence considerations.
 
 | Rank | Case / finding | Consequence | Usage and basis | Reach | Evidence / confidence | Next action | Effort / dependency |
 |---|---|---|---|---|---|---|---|

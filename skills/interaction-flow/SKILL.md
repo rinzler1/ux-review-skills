@@ -24,7 +24,7 @@ A multi-region request still needs complete journeys through those regions. Test
 
 ## 1. Understand enough to review the snapshot
 
-Use session context and the product's brief, local instructions, task/spec and available records to state who uses it, the job, and the authority line: what the person decides versus what the system may do. Note the objects they work with and their relationships. Do not impose a methodology or completeness requirements on a permissive tool.
+Let the prompt define the perspective. Use session context and relevant product evidence to state whose perspective is being reviewed, their situation, what they need to accomplish or decide, and what evidence they need. Reuse supplied answers; ask only about consequential gaps. Note the authority line and relevant objects/relationships. Do not impose a persona, methodology or completeness requirements on a permissive tool.
 
 Identify the review target internally: current worktree/local build, deployed URL or supplied prototype. Record the version if known. A local project is a normal starting point; source access and GitHub are not prerequisites. Check relevant current decisions when available, especially explicit replacements of the observed workflow; don't demand a roadmap audit or a separate baseline exercise. Keep **observed behaviour**, **accepted target**, and **delivery status** distinct. Existing manual behaviour may be an already-planned implementation gap, not a fresh design decision. If intent is unavailable, state a narrow assumption rather than inventing it.
 
@@ -46,7 +46,7 @@ Map the objects to their authoritative records and intentional editing surfaces.
 
 For each case, follow the real interface to its outcome where allowed. Record observed actions, transitions, waits, recovery and return; screenshot meaningful stops. Count only performed steps. Keep unmeasured user time, unexecuted writes and unreachable states unknown; browser/tool execution time is not user task time. A source-derived path is useful evidence, not a completed browser journey.
 
-Tag each step with its main mode:
+Use the four modes as optional lenses for relevant steps, not exhaustive categories:
 
 | Mode | What the person needs | Check |
 |---|---|---|
@@ -67,7 +67,7 @@ The optional inventory helper is `python3 "$SKILL_DIR/scripts/screen_inventory.p
 
 ## 4. Keep only consequential findings
 
-A finding needs an affected case/step, concrete behaviour, a practical consequence and evidence. Distinguish:
+A finding needs an affected case/step, concrete behaviour, a practical consequence and evidence. State what was observed, what explanation or consequence is inferred, and what remains uncertain. Keep this to a sentence for a small review. Distinguish:
 
 - **Observed defect:** reproduced behaviour obstructs or misleads the task.
 - **Source-backed concern:** plausible problem needing reproduction or failure injection.
@@ -86,12 +86,8 @@ Preserve what works. Identify useful complementary routes, explicit control, saf
 
 Lead with the important findings and practical next steps. Use [templates.md](references/templates.md) proportionately; a narrow review need not fill every table. Read [recommendations.md](references/recommendations.md) for prioritization and validation.
 
-1. Brief intent, review target/scope and use-case coverage, including explicit gaps.
-2. A ranked fix table: affected case, consequence, estimated or measured usage, reach, evidence confidence, next action and relevant dependency/decision. Keep implementation effort separate from user impact; unknown estimates stay unknown.
-3. Per case: current path → friction/cause → coherent proposed path → relevant failure/return behaviour → acceptance scenario. Distinguish beginner discoverability from expert efficiency.
-4. The small interaction model needed to make the fixes coherent: places, decision ownership, shared state vocabulary and what belongs on demand. Reuse existing primitives; don't invent a dashboard to solve a misplaced action.
-5. Bounded next steps: **investigate**, **implement**, or **owner decision**. Link existing approved work before proposing new stories. Include affected files when source is available, expected benefit, what must survive, and how to verify it. Mock up changed screens when structure needs review, not for every finding.
+For a narrow screen or journey, give the scope, consequential findings with evidence and uncertainty, and practical next steps. For broader reviews, add a ranked fix table and per-case current path → friction → proposed path → relevant recovery/return → acceptance scenario. Include an interaction model only when several fixes need shared places, state vocabulary or decision ownership. Link existing approved work before proposing new stories. Keep effort separate from user impact, leave unknown estimates unknown, and mock up screens only when structure needs review.
 
-Before delivery reconcile requested regions/jobs against coverage. Mark cases observed, partially reviewed, unavailable or inaccessible. Group shared causes without dropping isolated findings. With a prior review, distinguish still present, resolved, new and unverified. Never mark an unobserved fix resolved. The review is an expert evaluation, not user research or accessibility conformance certification.
+Before delivery reconcile requested regions/jobs against coverage. Mark cases observed, partially reviewed, unavailable or inaccessible. Group shared causes without dropping isolated findings. With a prior review, distinguish still present, resolved, new and unverified. Never mark an unobserved fix resolved. A simulated perspective is a labelled heuristic exercise, not user research or accessibility conformance certification.
 
 This skill evaluates and proposes work; it does not silently edit the product, publish, notify others or create a roadmap. A request to implement findings supplies a separate scope, subject to the project's existing permissions and instructions.

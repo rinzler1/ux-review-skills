@@ -20,7 +20,7 @@ A spec fails most often not in its code but in its meaning: two readers, two pro
 
 ## Before asking anything: explore
 
-Read what can answer questions without the person: the product's own definition (README, brief, current state), the object's parents (the epic's why and decisions, the project's intent), the code the change would touch, related feedback, issues and earlier specs, and the lenses in this skill's references ([meaning-and-context.md](references/meaning-and-context.md), [how-people-think.md](references/how-people-think.md), [design-reflections.md](references/design-reflections.md)). Write down what you now know and what you assume. **Never ask a question the records, the code or the person's earlier words already answer**; state the answer as an assumption instead and let them correct it.
+Read what can answer questions without the person: the prompt, the product's own definition (README, brief, current state), relevant parent decisions, code, feedback, issues and earlier specs. Consult the relevant lenses in [meaning-and-context.md](references/meaning-and-context.md), [how-people-think.md](references/how-people-think.md) and [design-reflections.md](references/design-reflections.md) as needed. Establish whose perspective matters, their situation, what they need to accomplish or decide, and what evidence they need. Separate confirmed decisions, evidence and unresolved assumptions. **Never ask a question the prompt, records, code or person's earlier words already answer**; carry explicit owner choices forward as confirmed decisions, not assumptions.
 
 ## What to ask about
 
@@ -29,7 +29,7 @@ Only what the person alone can decide. Draw candidates from these, then keep the
 | Topic | The question behind it |
 |---|---|
 | Need | What problem, for whom, observed where? Is the request a solution to something else? |
-| Who, when, mode | Who does this, how often, while doing, waiting, understanding or configuring? |
+| Perspective and situation | Whose perspective is specified, what situation are they in, what must they accomplish or decide, and what evidence do they need? The four modes are useful lenses, not exhaustive categories. |
 | Outcome | What does done look like, observably? What would make you reject the result? |
 | Authority line | What must you decide yourself; what may the system or a model decide; what is never automatic? |
 | Scope | What is explicitly out? What tempting extension must wait? |
@@ -55,7 +55,7 @@ Rank candidates by **uncertainty × impact**: ask first where a wrong guess woul
 1. Read the target (a spec, a story's intent, a feature description, a mock-up) and explore its context.
 2. List its **ambiguities of meaning**: a phrase two careful readers would build differently, a done-when that can't be observed, an unstated authority line, a missing out-of-scope, a state left undefined, a name used two ways, a dependency left implicit. Quote each.
 3. Resolve what exploration can; ask the person about the rest, ranked.
-4. Deliver: the ambiguities found, each with its resolution (answered by the person, or assumed with reason), and the exact edits to the target's text that encode the answers. Apply the edits only if the person asks, or if the target is a draft you were asked to improve.
+4. Deliver: the consequential ambiguities, each with its resolution (confirmed by the person or records, or unresolved with an explicit assumption), and the edits that encode the answers. Apply edits when the request authorizes them.
 
 ## Command: `spec <idea or story>`
 
@@ -63,13 +63,15 @@ Rank candidates by **uncertainty × impact**: ask first where a wrong guess woul
 2. Interview, ranked, in rounds.
 3. Write the spec in the project's own format (its card or template if it has one; otherwise: Outcome, Acceptance criteria, Scope, Out of scope, Files likely touched, Verification, Open questions). Every acceptance criterion is observable; every decision from the interview appears where it constrains the work; nothing the person left undecided is silently decided: it is either an assumption stated in Scope or an open question.
 4. If the project limits spec size or has a spec check, respect it and run it.
-5. Saving the spec where the work is tracked is a separate, explicit step the person approves (for example a draft in the tracker, never an approval).
+5. Save the spec when the request or established session authorization includes that destination. Ask only if the destination or external write authority is still unclear; never treat drafting as approval of the spec.
 
 ## The decisions log
 
 End every session with the log, short and reusable:
 
-> **Q:** <question, quoting the phrase it resolved> · **A:** <answer> · **By:** person | assumed (why) · **Changes:** <what it changes in the spec or product>
+> **Decision:** <explicit owner choice or previously confirmed decision> · **Source:** <prompt / owner answer / accepted record> · **Changes:** <what it changes>
+
+For genuinely unresolved information, separately record **Assumption:** <working interpretation and why> · **Could change:** <consequence>. Do not relabel an explicit choice as an assumption.
 
 Keep it with the work (in the spec's notes, the story, or the issue) so later readers and models see why the spec says what it says.
 

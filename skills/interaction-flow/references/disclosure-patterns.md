@@ -1,6 +1,6 @@
 # Disclosure patterns: why is this a tab, a pane, a drawer, a modal, a fold or its own page?
 
-Every way of showing or hiding content makes a promise to the person: tabs say "peers, one at a time", a modal says "decide this now", a fold says "detail if you want it". When the pattern's promise doesn't match how the person uses the content, they hunt, lose their place, or miss what was hidden. Run this pass on every screen a journey stops at, starting from the patterns the inventory script finds (tabs, folds, drawers, dialogs, panes).
+Every way of showing or hiding content makes a promise to the person: tabs say "peers, one at a time", a modal says "decide this now", a fold says "detail if you want it". When the pattern's promise doesn't match how the person uses the content, they hunt, lose their place, or miss what was hidden. Use this pass where disclosure affects the scoped task, starting from observed tabs, folds, drawers, dialogs or panes.
 
 ## The patterns and their promises
 

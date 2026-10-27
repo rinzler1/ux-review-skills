@@ -18,7 +18,7 @@
 | # | Mode | Where | What the person does | What the system does | Clicks | Wait (shown?) | Carried in memory | Defect |
 |---|---|---|---|---|---|---|---|---|
 
-Mode is one of: doing, waiting, understanding, configuring.
+Mode, when useful, may be doing, waiting, understanding or configuring; describe other perspectives in the prompt's terms.
 
 Totals: observed clicks, page changes, waits (stated / unstated), repeated facts, order-dependent steps, and measured time or observed steps per mode. Leave unobserved write/recovery segments and unmeasured durations unknown; separate tool/reviewer elapsed time. Record walkthrough shortcuts and their effect on evidence.
 
@@ -37,14 +37,14 @@ Pertinence ratio: <measured x% or unknown> of the first viewport is **now** · T
 
 ## Finding
 
-- **[blocks|costs|confuses] · <mode> · <short title>.** Journey <name>, step <n>. What happens: … Human cause: <principle from how-people-think.md>. Evidence: <screenshot / file:line / record>. Next action: investigate / implement / existing work / owner decision. Fix and expected benefit: … Preserve: … Validation: … Closes: <feedback / issue>.
+- **[blocks|costs|confuses] · <short title>.** Affected task/step: … Observed or source evidence: … Inferred explanation/consequence: … Uncertainty: … Next action and validation: … Add human cause, preservation and links when they help the decision.
 
 ## Priorities (after fan-out)
 
 | Rank | Case / finding | Kind / severity | Usage and basis | Reach | Evidence / confidence | Next action | Effort / dependency | Since last review |
 |---|---|---|---|---|---|---|---|---|---|
 
-Kind: observed defect / source concern / approved implementation gap / recommendation / owner decision. Next action: investigate / implement / existing story / decide. Frequency is measured, reported or estimated; missing values remain unknown. Reach counts distinct affected cases. Keep effort separate from user impact. Use the optional ordinal aid in recommendations.md only with labelled assumptions; don't rank a hypothesis as a proven blocker. Since last review: still present / resolved / new / unverified. Report only measured task time, separate from tool/reviewer time.
+Use this table only when the scope warrants it. Kind: observed defect / source concern / approved implementation gap / recommendation / owner decision. Frequency is measured, reported or estimated; missing values remain unknown. Reach counts distinct affected cases. Rank blockers and serious consequences before lesser friction; frequency and reach order comparable severity. Keep effort separate and do not rank a hypothesis as a proven blocker. Since last review: still present / resolved / new / unverified.
 
 ## Interaction model
 

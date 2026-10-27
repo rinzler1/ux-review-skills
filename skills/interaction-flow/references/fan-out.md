@@ -10,9 +10,9 @@ Include first-use and repeated/expert paths where they differ. Sample representa
 
 ## Give every reviewer the same context
 
-Share intent/authority, object relationships, review target/version, relevant accepted decisions, scope/exclusions, allowed actions, evidence vocabulary and prior findings. Add per case its trigger, starting state, successful outcome, likely frequency and how to reach it through real screens or documented fixtures, prepared before dispatch where it isn't in the data (see SKILL.md step 2). Add what the reviewer may change, which side effects were disabled, and its budget for actions that spend money. Include only the reference lenses relevant to the task. Within a reviewer's word budget, apply the full pertinence, structure and disclosure passes to the one or two screens where the case's decision or wait happens, and note only clear problems elsewhere.
+Share the prompt's perspective/situation, task and evidence needs, intent/authority, relevant object relationships, target/version, accepted decisions, scope/exclusions, allowed actions and prior findings. Add per case its trigger, starting state, successful outcome, frequency basis and how to reach it. Include only relevant reference lenses. Set a scope-based budget for journeys, stops, references and output detail; expand only when a consequential unresolved gap warrants it. Stop when requested outcomes are covered and more inspection would only repeat evidence.
 
-Use available delegation tools, one reviewer per independent use case where practical; group adjacent cases when resources are limited and retain their individual outcomes. State count, target and a task-specific effort estimate; missing usage/cost is unknown. Honor session authorization and obtain any missing access or material additional cost approval. Do not use a historical token total as a per-journey minimum.
+When delegation is authorized and useful, use one reviewer per independent use case where practical; group adjacent cases when resources are limited and retain their outcomes. State count, target and scope-based effort; missing usage/cost is unknown. Reuse established authorization and ask only for missing access or material additional scope/cost.
 
 Independent browser walks need isolated state: disposable instances or independent read-only sessions. With one authenticated session, a shared walker can gather evidence for parallel analysis. Label this shared-walker review; screenshot/source reviewers have not independently completed the journey. If delegation is unavailable, walk sequentially and say so. Never give several agents conflicting edit ownership or credentials in public artifacts.
 
@@ -25,7 +25,7 @@ Each reviewer returns, within a stated word budget: current path and mode per st
 - Group the same cause across cases and count distinct affected use cases, not reviewers or repeated sightings.
 - Retain a finding with reach one. Do not multiply reach by how finely the review happened to split journeys.
 - Separate demonstrated defects, concerns awaiting reproduction, approved delivery gaps and owner decisions.
-- Prioritize consequence, usage frequency and reach; show confidence and separate effort/dependencies. Use the optional ordinal aid in recommendations.md only with labelled assumptions.
+- Rank blockers and serious consequences first; use frequency and reach within comparable severity. Show whether frequency is measured, reported or assumed, plus confidence and separate effort/dependencies.
 - Compare prior findings as still present, resolved, new or unverified. Missing access is not a pass.
 - Keep contextual exceptions: a repeated route may be useful, a sparse workspace may be appropriate, and explicit operator control may justify a click.
 

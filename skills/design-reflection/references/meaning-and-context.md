@@ -2,7 +2,7 @@
 
 # Meaning and context: does each object say why it exists, and does context flow?
 
-Journeys and screens can be smooth while the product still confuses, because people don't know *why* a thing exists, what it inherits from its parent, or how it relates to what the product is today. Run this lens on the object map (step 2) and on every screen where something is created or decided.
+Journeys and screens can be smooth while the product still confuses, because people don't know *why* a thing exists, what it inherits from its parent, or how it relates to what the product is today. Use this lens where origin, inherited context or meaning affects the requested task.
 
 ## 1. Every object answers three questions, at its own level
 
