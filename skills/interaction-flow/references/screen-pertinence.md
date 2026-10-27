@@ -1,10 +1,10 @@
 # What's on the screen, and how pertinent it is
 
-At each stop of a journey, the person arrives in one mode (doing, waiting, understanding, configuring) with one question ("what do I do now?", "is it done yet?", "what is this?", "what is it set to?"). Everything on the screen either serves that moment, serves another moment, or serves none. This pass measures that.
+At a relevant stop, use the prompt's perspective and task to ask what the person needs to accomplish or decide and what evidence they need. Doing, waiting, understanding and configuring are useful lenses, not an exhaustive classification. This pass judges whether visible content serves that moment.
 
 ## 1. Inventory the screen
 
-For each stop, list what is visible, top to bottom, first viewport first. Use the skill's `scripts/screen_inventory.py` on the running app at the product's real desktop size (it lists visible headings, actions, fields, status marks, tables, media and text blocks with the share of the viewport each covers), then check the list against the screenshot: merge pieces that read as one thing (a chip and its label), and add anything the script missed (a canvas, a custom control).
+For important stops, list what is visible. The optional `scripts/screen_inventory.py` lists elements and viewport shares at a chosen size. Check it against the screen: merge pieces that read as one thing and add anything missed. Use the viewport relevant to the request; a number from the script is diagnostic evidence, not a quality threshold.
 
 Name each element by what the person sees ("the five-step progress track", "Approve and queue button"), not by its code name.
 
@@ -25,7 +25,7 @@ Rate in context: the same element can be **Now** at one stop and **Elsewhere** a
 Per screen, report:
 
 - **Pertinence ratio** — share of the first viewport covered by **Now** elements. Use this as a contextual heuristic, not a pass/fail threshold. Count a working canvas as task content even when sparse; report the viewport and non-overlapping area denominator, and never sum overlapping containers or assign an unmeasured percentage.
-- **The answer's place** — where the element that answers the person's question sits (first viewport? how far down? how large?). The answer below the fold, or smaller than its neighbours, is a finding.
+- **The answer's place** — where the element that answers the person's question sits. Below the fold or smaller than neighbours may matter when it impedes this task; explain the consequence before calling it a finding.
 - **Competing primaries** — count of elements styled as the main action or the main status. Judge competition within the active task or region; several legitimate actions on a spatial workspace are not automatically a defect.
 - **Repeats** — facts shown more than once on the screen or already shown on the previous stop.
 - **Text against purpose** — the words per region (from the inventory) judged against the step: plenty is right where the person came to read, a few words where they came to decide, act, wait or find one fact.
@@ -33,7 +33,7 @@ Per screen, report:
 
 ## 4. Verdict
 
-For each screen, one line: "<screen> at step <n> (<mode>): pertinence <x>%; answer <where>; <k> competing primaries; remove <list>; fold <list>; move <list> to <place>." Mark unmeasured percentages as unknown. Add demonstrated irrelevant content, misplaced answers and competing actions as findings with their consequence and human cause (usually from `how-people-think.md`: limited attention, scanning, change outside focus, choice overload) and its severity.
+Summarize only the measurements that help explain this task. Mark unmeasured percentages as unknown. Add irrelevant content, misplaced answers or competing actions as findings only with a practical consequence and supporting evidence.
 
 Rules:
 

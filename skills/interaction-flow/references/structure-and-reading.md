@@ -1,6 +1,6 @@
 # Structure and reading: are things grouped and ordered the way a person reads them?
 
-The pertinence pass asks whether the right content is on the screen. This pass asks whether it is **grouped, separated and ordered** so a person reads it as intended. Run it on every screen a journey stops at, using the regions, depths, styles and order the inventory script reports, then check against the screenshot.
+The pertinence pass asks whether the right content is on the screen. This pass asks whether it is **grouped, separated and ordered** so a person reads it as intended. Apply it where structure could change the scoped task; use inventory measurements when helpful and check them against the screen.
 
 People don't read a screen from code; they read shapes. Containers (borders, fills, cards, panels, columns), space and alignment tell them what belongs together, what is separate, what comes first and how deep they are. When the structure says something the content doesn't mean, people misread the screen however good each element is.
 
@@ -36,7 +36,7 @@ Human cause: familiar patterns are read for free; consistency builds trust.
 
 On a dense screen, people start top-left and move across and down, skimming left edges and headings (an F-shaped scan); on a sparse screen, the eye goes to the largest, highest-contrast shape first.
 
-- *Is the first thing the eye lands on the most important thing for this step's mode?* (doing: the action and its facts; waiting: the phase; understanding: what this is and where it stands; configuring: the current value.)
+- *Is the predicted visual entry point useful for this step?* Consider size, contrast and position; actual fixation requires eye-tracking evidence.
 - *Does the reading order (the inventory's order) match the order the person needs things in?* The question before its answer, the state before the action, the summary before the detail.
 - *Is anything important placed where the scan skips:* the far right of a wide screen, below a tall block, or inside a fold?
 - *On a wide screen, do columns have a reading order (left feeds right), or are they read in parallel?* Say which, and check that it's obvious.

@@ -14,6 +14,8 @@ These skills give your agent the questions a thoughtful designer asks before any
 
 > **Status: early (v0.3).** The method comes from real use on one product. The skills as packaged here are new: feedback and issues are very welcome.
 
+**v0.3.2 patch:** Reviews now follow the perspective and scope in the prompt, distinguish observation from interpretation, and rank confirmed blockers before frequency or reach. Multiple synchronized editing surfaces remain valid. See [manual review checks](docs/manual-tests.md).
+
 ## Design is more than how it looks
 
 Typography, colour, spacing and a consistent component library matter. They are also the part of design that is easiest to see, and the part most AI design tools now cover well. A great designer spends much of their time on what lies beneath:
@@ -22,7 +24,7 @@ Typography, colour, spacing and a consistent component library matter. They are 
 |---|---|
 | **User journeys** | What is the person trying to get done, and what path do they actually take across screens, waits and decisions? |
 | **Mental models** | Does the product behave the way people expect it to, or must they learn its internals? |
-| **Information architecture** | Does every object have one clear home, and are related things found together? |
+| **Information architecture** | Do the places people use share a clear authoritative model, and are related things found together? |
 | **Cognitive load** | What must the person remember from one screen to the next, and could the screen carry it for them? |
 | **Progressive disclosure** | Is what matters now shown first, with the rest one step away and nothing required hidden? |
 | **Feedback and waiting** | Does the person know what happened, what is in progress, how long it will take and whether they can leave? |
@@ -41,7 +43,7 @@ What the skills can do is the methodical part, quickly and on every change: walk
 
 They don't generate styles or colour palettes. They review **how people move through a product**, **what each screen should show**, and **what the work actually means**.
 
-The headline feature: **fan out over your users' journeys.** One agent per use case walks your running app the way a person would, all at the same time. Their findings merge into a single list ranked by how often each journey happens, how badly it breaks, and how many journeys hit the same defect.
+For broad reviews, agents can **fan out over journeys**. Each reviewer follows a use case through the running app where possible. Their findings merge into a list ranked by consequence, then usage and reach within comparable severity. A narrow screen or journey review stays narrow.
 
 ---
 
@@ -114,19 +116,19 @@ Most UX reviews look at screens one at a time. People don't use screens one at a
           │                ┌─▶ "sign up and invite a teammate"   weekly ─┐
           ▼                ├─▶ "create an order"                 daily  ─┤
  journeys picked by  ──────┼─▶ "fix a failed payment"            rare   ─┼─▶ merge ─▶ ranked
- frequency × consequence   ├─▶ "find what changed this week"     weekly ─┤           priorities
+ consequence and usage     ├─▶ "find what changed this week"     weekly ─┤           priorities
                            └─▶ "end-of-day review"               daily  ─┘           ─▶ stories
 
  each agent: its own throwaway instance · real clicks · screenshots · measured steps
-             · pertinence, structure and disclosure passes at every screen
+             · relevant screen lenses at decision and wait points
 ```
 
-**How the journeys are chosen.** The skill first states the product's intent and maps its objects. Then it picks five to eight journeys by **frequency × consequence**: the daily loop first, then the rare but costly ones (first use, recovery after a failure, undo). You can name your own.
+**How the journeys are chosen.** The prompt establishes whose perspective matters, their situation, goal or decision, and evidence needs. The skill chooses the journeys needed for that scope, led by consequence and informed by usage. A broad review may cover several journeys; a screen request stays narrow.
 
 **What each agent does.** Each agent gets the same brief: the intent, the object map, the four modes, the checklist and the human principles. Then it walks its one journey in the running app:
 - it clicks, waits and reads as the person would;
 - it screenshots every stop and measures each step: clicks, page changes, waits, what must be remembered, what's said twice, steps whose order isn't enforced;
-- at every screen it runs the pertinence, structure and disclosure passes;
+- at consequential stops it applies the relevant pertinence, structure or disclosure lenses;
 - it returns findings in one shared format, each with its mode, severity and human cause.
 
 **Start with your current project.** Point the skill at the current worktree/local build, a prototype or a deployed URL. It uses available task/spec context internally; no separate baseline command, repository access or GitHub connection is required. Existing startup and access instructions are reused; missing access or mutation permission is requested only when needed. It never guesses how to reset your app. Read-only means loading pages, opening tabs and folds, and reading. A step that would save, send, pay or delete is described from the code instead, and marked "not observed". This is an instruction to the agents, not a sandbox, so point them at something you can afford.
@@ -134,12 +136,8 @@ Most UX reviews look at screens one at a time. People don't use screens one at a
 **How the findings merge:**
 - The same defect seen on several journeys becomes one finding, with a higher reach.
 - A finding seen on only one journey keeps reach 1; it's never dropped.
-- Observed incidence beats a guess: counts from the product's records, logs or complaints replace the estimated frequency, and the report says when that lifts a finding.
-- Findings are prioritized by consequence, usage and reach, with evidence confidence and implementation effort shown separately. An optional ordinal aid is **frequency × consequence × reach**, not a measured business score:
-  - frequency: daily 3, weekly 2, rare 1;
-  - consequence: blocks 3, costs 2, confuses 1;
-  - reach: how many journeys hit it.
-- Ties go to a group with a blocker, then to the group with more findings, then to doing and waiting steps, which are on the daily path.
+- Measured incidence is labelled separately from owner reports and reviewer estimates; journey counts and complaints do not establish a population rate.
+- Confirmed blockers and serious consequences lead. Frequency and reach order findings within comparable severity; the report labels measured, reported and assumed frequency. Evidence confidence and implementation effort stay separate.
 - With an earlier review, each group is marked still there, new or gone.
 - The report separates observed task time from tool execution time, leaves missing measurements unknown, and says which journeys could not be fully walked.
 - Each finding names a practical consequence, what should change, what must survive, and an acceptance scenario. Source concerns go to investigation; already-approved delivery gaps link existing work rather than reopening decisions.
@@ -152,9 +150,9 @@ Most UX reviews look at screens one at a time. People don't use screens one at a
 
 Its top finding came from four of the six journeys.
 
-The packaged `fan-out` command was then run end to end on the same app, given only the command, in a session that already knew the product. It stated the intent, proposed eight journeys with reasons, asked where to walk, gave a cost and waited, launched eight agents in parallel, and merged 106 findings into 12 ranked groups. It confirmed which earlier problems were still there and found new ones the first run couldn't: a feature shipped the day before missing one of its four entry points, and a feedback loop nobody closed. It used about 1.7 million tokens and 20 minutes, more than its own estimate. Two agents strayed from the brief (one skipped its instance, one stepped around a check), and five groups tied for first place. The estimate, the brief and the tie-break were fixed after that run.
+The packaged `fan-out` command was then run end to end on the same app, given only the command, in a session that already knew the product. It stated the intent, proposed eight journeys with reasons, asked where to walk, launched eight agents in parallel, and merged 106 findings into 12 ranked groups. It confirmed which earlier problems were still there and found new ones the first run couldn't: a feature shipped the day before missing one of its four entry points, and a feedback loop nobody closed. Two agents strayed from the brief (one skipped its instance, one stepped around a check), and five groups tied for first place. The review brief and tie-break were revised after that run.
 
-A third run walked seven journeys on local copies of the same app's real data and used about 1.1 million tokens. Because the agents traced what they saw to the source, it found real bugs: an approval that went through and then refused its next step, a "fixed" notice raised while linked work was still open, and a timeline warning about a finished item. It also showed where the method was thin. Version 0.3 fixes these:
+A third run walked seven journeys on local copies of the same app's real data. Because the agents traced what they saw to the source, it found real bugs: an approval that went through and then refused its next step, a "fixed" notice raised while linked work was still open, and a timeline warning about a finished item. It also showed where the method was thin. Version 0.3 fixes these:
 - The copy held none of the short-lived states two journeys needed, so their agents spent about a third of their effort rebuilding them.
 - The app's own background jobs would have acted on the developer's working copy if they had not been redirected by hand.
 - Guessed frequency ranked the operator's most frequent real pain below cosmetic issues.
@@ -173,7 +171,7 @@ Tell us how it does on your product.
 
 | Skill | Use it when | You get | Talks to you? |
 |---|---|---|---|
-| [**interaction-flow**](skills/interaction-flow/SKILL.md) | a workflow feels clunky, before a redesign, or to rank UX work | **one agent per user journey, in parallel**, walking the running app; every screen judged; findings merged and ranked by priority; small stories to fix them | No. It works from evidence |
+| [**interaction-flow**](skills/interaction-flow/SKILL.md) | a workflow feels clunky, before a redesign, or to rank UX work | scoped journey or screen review, with optional fan-out; findings grounded in evidence and ranked by consequence | Only for consequential gaps |
 | [**design-reflection**](skills/design-reflection/SKILL.md) | someone proposes a feature, before its spec | a one-page design brief: the need, where it belongs, the simplest shape, two alternatives, at most three questions | Rarely. At most three questions |
 | [**clarify-intent**](skills/clarify-intent/SKILL.md) | an intent is vague, or a spec reads well but could mean two things | a few questions at a time with proposed answers, a decisions log, then a reviewed or written spec | Yes. That's its job |
 
@@ -231,20 +229,20 @@ An excerpt from `interaction-flow` on a fictional shop. The example is illustrat
 
 ```text
 ┌─ Priorities ──────────────────────────────────────────────────────────────────────────┐
-│ #  Finding                                            Mode       Severity  Reach  Pri │
-│ 1  "Pay" stays enabled while the address is invalid;  doing      blocks    3      27  │
+│ #  Finding                                            Lens       Severity  Reach      │
+│ 1  "Pay" stays enabled while the address is invalid;  doing      blocks    3          │
 │    the error appears only after the card is charged                                   │
-│ 2  Order status reads "processing", "pending" and     understand confuses  3       9  │
-│    "in progress" on three screens                                                     │
-│ 3  Shipping options open in a drawer that covers the  doing      costs     1       6  │
+│ 2  Shipping options open in a drawer that covers the  doing      costs     1          │
 │    total they change                                                                  │
+│ 3  Order status reads "processing", "pending" and     understand confuses  3          │
+│    "in progress" on three screens                                                     │
 └───────────────────────────────────────────────────────────────────────────────────────┘
   Finding 1 · blocks · doing · Journey "checkout", step 4
   Human cause: constraints prevent errors better than messages (the UI allows a wrong order)
   Fix: disable "Pay" with the reason shown until the address validates
 ```
 
-Each screen gets a pertinence and structure report, starting from what's actually rendered:
+A consequential screen can get a pertinence and structure report, starting from what's actually rendered:
 
 ```text
 $ python scripts/screen_inventory.py http://localhost:3000/checkout
@@ -261,10 +259,10 @@ DISCLOSURE PATTERNS
 And `clarify-intent` ends with a decisions log the next reader can trust:
 
 ```text
-Q: "Export the ledger" — all entries, or the filtered view?   A: the filtered view
-   By: owner · Changes: export reads the current filters; criterion 2 rewritten
-Q: Include a totals row?                                     A: assumed yes (finance asked for it in #41)
-   By: assumed · Changes: criterion 4 added
+Decision: export the filtered view · Source: owner answer
+   Changes: export reads the current filters; criterion 2 rewritten
+Assumption: include a totals row (requested in #41, not yet confirmed)
+   Could change: criterion 4
 ```
 
 ---
@@ -273,16 +271,16 @@ Q: Include a totals row?                                     A: assumed yes (fin
 
 ```text
  intent ─▶ objects ─▶ journeys (fanned out) ───────▶ findings ─▶ priorities ─▶ model ─▶ stories
- who,      one model   walked in the running app,    each with   frequency ×   places,    small,
- job,      with views, measured step by step         its human   consequence   decisions, sequenced,
- authority meaning     (one agent per journey with   cause       × reach       vocabulary, each with
+ who,      one model   walked in the running app,    each with   severity,     places,    small,
+ job,      with views, measured step by step         its human   then usage    decisions, sequenced,
+ authority meaning     (one agent per journey with   cause       and reach     vocabulary, each with
            and context  fan-out)                                               layers      its files
                               │
-                              ▼  at every screen
+                              ▼  at relevant stops
             pertinence · structure & reading · disclosure · text vs purpose
 ```
 
-Every step is tagged with the person's **mode**, because each mode needs a different design:
+The four **modes** are useful lenses for relevant steps, not a complete set of perspectives:
 
 | Mode | The person wants | Typical defect |
 |---|---|---|
@@ -324,7 +322,7 @@ They also trigger on plain requests like *"this workflow feels clunky"*, *"where
 <details>
 <summary><b>Does it change my app or my data?</b></summary>
 
-No. `interaction-flow` walks the app read-only. For anything that writes, it uses a throwaway instance you can point it at, never production. On a local copy of your real data, it lists the side effects it disabled (jobs, webhooks, mail, payments, git, outbound calls) before any write. `design-reflection` and `clarify-intent` write a brief, a log or a spec, and saving them where your work is tracked is a separate step you approve.
+No. `interaction-flow` walks the app read-only. For anything that writes, it uses a throwaway instance you can point it at, never production. On a local copy of your real data, it lists the side effects it disabled (jobs, webhooks, mail, payments, git, outbound calls) before any write. `design-reflection` and `clarify-intent` may write a brief, log or spec within the request's established authorization; they ask only when an external destination or authority is unclear.
 </details>
 
 <details>
@@ -336,7 +334,7 @@ It needs Python 3 and Playwright: `pip install playwright && playwright install 
 <details>
 <summary><b>How expensive is a fan-out review?</b></summary>
 
-Cost depends on scope, browser access, available context and delegation. Historical runs used 1.7 million tokens for eight journeys (about 20 minutes) and 1.1 million for seven; that is not a per-journey minimum or prediction. The skill gives a task-specific estimate and marks unavailable cost/usage unknown. For one journey or screen, use `review` or `screen`.
+Cost depends on requested scope, browser access, available context and delegation. Budget the relevant journeys, stops, references and output detail; stop when requested outcomes are covered and further inspection would repeat evidence. Mark unavailable cost/usage unknown. For one journey or screen, use `review` or `screen`.
 </details>
 
 <details>

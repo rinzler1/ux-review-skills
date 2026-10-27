@@ -16,15 +16,17 @@ argument-hint: "[feature idea or spec to reflect on]"
 
 # Design reflection
 
-The person proposing a feature knows the need and the product. This skill does not override their decision; it makes sure the decision is taken with a designer's questions answered. Its output is a short brief: the need, where the feature belongs, a recommended shape, two alternatives, the few questions only the owner can answer, and how success will show.
+The person proposing a feature knows the need and the product. This skill does not override their decision; it makes sure the decision is taken with a designer's questions answered. Its output is a short brief scaled to the request: the need, where the feature belongs, a recommended shape, credible alternatives when useful, consequential questions only the owner can answer, and how success will show.
 
 Read the product's own definition first (README, brief, current state, design system, open feedback and issues) and, when the product runs, look at the places the feature would touch. Reflection grounded in the real product beats generic advice.
 
+Separate what was observed or supplied from your interpretation and remaining uncertainty. If the prompt asks you to simulate a perspective, label the exercise heuristic; it does not establish what real users think or do.
+
 ## The reflections
 
-Go through them in order. Write one or two sentences each; skip one only by saying why it doesn't apply.
+Use the reflections that could change this decision. A small request needs only the relevant ones; a broad feature may need most of them. Stop when further lenses would repeat evidence or leave the recommendation unchanged.
 
-1. **The need behind the request.** Restate it as a job, not a solution: who, in what situation, how often, in which mode (doing, waiting, understanding, configuring; see the interaction-flow skill), and the evidence (feedback, incidents, measurements). A request is often a solution to an unstated problem; name the problem.
+1. **The need behind the request.** Use the prompt's perspective: whose, in what situation, what they need to accomplish or decide, and what evidence they need. Reuse known frequency and feedback when available. Doing, waiting, understanding and configuring are useful lenses, not exhaustive categories. Distinguish observed need from inferred need and ask only about a gap that changes the shape.
 
 2. **Where it belongs in the concept model.** Is this a new concept, or a property, state or view of one that exists? Prefer extending an existing concept to adding a new one. Name it the way the person would. If it overlaps an existing feature, say which one gives way. *Example: "tasks should depend on other tasks" is a property of tasks, and can turn a separate per-run setting ("run these in sequence") into a consequence of the plan instead of a choice to remember.*
 
@@ -39,8 +41,8 @@ Go through them in order. Write one or two sentences each; skip one only by sayi
 
 5. **States and edge cases.** Empty, first use, one, many, very many; error, conflict, concurrency; undo and reversal; what happens to existing data (migration, defaults for old records); permissions and the authority line. Name the state most likely to be forgotten.
 
-6. **Where it lives and how it shows.** For each mode it serves:
-   - its place (its one home, and where it is only referenced);
+6. **Where it lives and how it shows.** For each relevant task or mode:
+   - its place and intentional authoring surfaces, with one authoritative model for state, rules and permissions;
    - its layer: L0 glance, L1 next action, L2 on demand, L3 expert.
 
    Required decisions are never hidden in L2 or L3. Explain options by their consequence, not their mechanism.
@@ -51,14 +53,14 @@ Go through them in order. Write one or two sentences each; skip one only by sayi
 
 9. **Cost and attention.** What it costs to build, to run (tokens, time, compute), and in attention (a new thing to read, a new choice to make). A feature that adds a daily decision has to save more than it costs.
 
-10. **How we'll know it worked.** One observable signal the product itself can show: fewer clicks on a journey, a count that drops, a wait that disappears, a feedback code that stops recurring.
+10. **How we'll know it worked.** Choose an observable signal relevant to the outcome. Click counts or other measurements are diagnostic evidence, not universal quality thresholds; say whether a baseline was measured or only proposed.
 
 ## Designerly principles to apply
 
 Use these to judge each reflection. Name the principle when it decides something.
 
 - **Subtract first.** The best feature often removes one.
-- **One concept per job; one home per concept.**
+- **One authoritative model per concept.** Multiple editing surfaces can work when they share state, rules and permissions; flag divergence or unclear ownership.
 - **Name things in the person's words,** never the system's.
 - **Defaults over options.** Policy over prompts. A good default with a visible source beats a choice.
 - **Make the right thing the easy thing.** Make the wrong order impossible, not documented.
@@ -77,7 +79,7 @@ Keep it to about one page:
 - **Need:** the job, who, when, mode, evidence.
 - **Belongs to:** the concept it extends, or why it's new; what it replaces.
 - **Recommended shape:** the simplest version. What is derived, judged and asked. Where it lives and its layer. States covered.
-- **Alternatives:** two other shapes with their trade-offs, including "don't build it" when it's credible.
+- **Alternatives:** credible shapes and trade-offs when they would affect the decision, including "don't build it" when credible.
 - **Left out on purpose:** and when it might come back.
 - **One-way doors:** what will be hard to change later.
 - **Questions for the owner:** at most three. Only decisions the brief can't take: priorities, authority, taste.

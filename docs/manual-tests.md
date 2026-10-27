@@ -15,17 +15,17 @@ Give it nothing else, and watch whether it:
 - [ ] uses the current project/build or supplied URL and existing authorization; asks only for missing access, never guesses startup/reset
 - [ ] announces agent count, walk target and task-specific effort; uses existing authorization and asks only for missing scope or permission
 - [ ] uses available delegation tools for independent journeys, labels shared-walker analysis when one authenticated browser supplies evidence, or walks sequentially
-- [ ] gives every agent the same brief: intent, objects, modes, checklist, human principles
+- [ ] gives reviewers the prompt's perspective, situation, goal/evidence needs and only the relevant lenses
 - [ ] never writes in a read-only walk (no saves, sends, payments, deletions), and marks such steps "not observed"
 - [ ] reaches each starting state through the product's screens or seed script, and says so when an agent stepped around a check or skipped its instance
 - [ ] decides before dispatch how each case's starting state is reached (in the data, through the screens, seeded, rewound in a copy, or unobserved), and prepares shared states once
 - [ ] on a copy of real data, lists the side effects it disabled or redirected (jobs, webhooks, mail, payments, git, outbound calls) before allowing writes, and caps actions that spend money
-- [ ] returns per journey: the measured steps with modes, screen passes (pertinence, structure, disclosure), and findings with severity, mode and human cause
-- [ ] merges shared causes across distinct cases, prioritizes consequence/usage/reach with evidence confidence and separate effort, and reports only measured task time
-- [ ] uses observed incidence (records, logs, complaints) over guessed frequency where available, and says when that lifts a finding
+- [ ] returns measured steps and consequential findings, with observed behavior, inferred explanation and uncertainty clearly separated
+- [ ] merges shared causes; ranks blockers and serious consequences first, then usage/reach within comparable severity, with confidence and effort separate
+- [ ] labels frequency as measured, reported or assumed rather than turning journey counts or complaints into incidence rates
 - [ ] traces observed blockers to file and line when source is available, and reports stale owner-maintained content apart from interface defects
 - [ ] with an earlier review, marks each group still there, new or gone
-- [ ] proposes an interaction model and small sequenced stories
+- [ ] proposes an interaction model or stories only where the findings need them
 
 Also note how long it took, its token use, and anything it got wrong about your product.
 
@@ -108,3 +108,16 @@ Provide an app with manual refresh/calculation controls and a newer accepted iss
 - [ ] uses cognitive walkthrough/heuristic/accessibility lenses appropriately without claiming user-study or conformance evidence
 
 Use [evaluation-cases.md](evaluation-cases.md) for reproducible source-only judgment tests. Run the relevant browser journeys separately; the cases do not replace them.
+
+## 9. Scope and perspective regressions
+
+Try each prompt in a fresh session with a suitable product. Judge the resulting scope and evidence claims, not headings.
+
+| Request | Expected behavior |
+|---|---|
+| Review this one screen for a specified task | Keeps the review to that screen and relevant entry/return context; uses only helpful lenses and measurements. |
+| Review a multi-step operational workflow | Walks the requested transitions, waits and recovery where available; separates observed steps from source-derived paths. |
+| Review from a buyer's perspective, as the prompt explicitly requests | Uses that perspective and its decision/evidence needs; labels simulated perspective as heuristic, not user research. |
+| Review a product with multiple synchronized editing surfaces | Checks shared state, rules, permissions and ownership; does not flag the number of surfaces alone. |
+
+In all four, confirmed blockers outrank lesser friction, frequency assumptions are labelled, and conclusions stay within observed or supplied evidence.
